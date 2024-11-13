@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://im1kcpvl6dve"
+path="res://.godot/imported/player_hurt.ogg-3390a1af644f4eac0e57dbcd466e7335.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sprites/4-Enemy-Big Guy/2-Run/player_hurt.ogg"
+dest_files=["res://.godot/imported/player_hurt.ogg-3390a1af644f4eac0e57dbcd466e7335.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

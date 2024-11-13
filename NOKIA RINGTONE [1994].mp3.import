@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dim57pd2nn8og"
+path="res://.godot/imported/NOKIA RINGTONE [1994].mp3-6ba4fcf0196629bf3e79ba4d657f5f37.mp3str"
+
+[deps]
+
+source_file="res://NOKIA RINGTONE [1994].mp3"
+dest_files=["res://.godot/imported/NOKIA RINGTONE [1994].mp3-6ba4fcf0196629bf3e79ba4d657f5f37.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

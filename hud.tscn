@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://co5llfp8c8u5o"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_8qjdv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt8rj"]
+bg_color = Color(0.0177324, 0.0177324, 0.0177324, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ddjg"]
+bg_color = Color(0.774835, 0.246611, 0.253328, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bf6yh"]
+font_size = 60
+font_color = Color(1, 0, 0, 1)
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 0.819608)
+shadow_offset = Vector2(5, 5)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8qjdv")
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="." groups=["player_health_bar"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -54.0
+offset_right = 675.0
+offset_bottom = -13.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_lt8rj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8ddjg")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="YouDied" type="Label" parent="." groups=["you_died_text"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -333.5
+offset_top = -43.0
+offset_right = 333.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOUR NOT ALIVE"
+label_settings = SubResource("LabelSettings_bf6yh")
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="DeathTextTimer" type="Timer" parent="." groups=["death_text_timer"]]
+wait_time = 0.05
+
+[connection signal="timeout" from="DeathTextTimer" to="." method="_on_death_text_timer_timeout"]
