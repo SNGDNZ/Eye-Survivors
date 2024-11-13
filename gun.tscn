@@ -29,4 +29,18 @@ autostart = true
 [node name="GunFire" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_2atcl")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_as_relative = false
+amount = 10
+lifetime = 0.2
+randomness = 0.67
+lifetime_randomness = 0.54
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+initial_velocity_max = 50.51
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

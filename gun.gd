@@ -14,7 +14,7 @@ var angle = Vector2.ZERO
 
 func _ready():
 	angle = player.global_position.direction_to(target)
-	rotation = angle.angle() + deg_to_rad(135)
+	rotation = angle.angle()
 	match level:
 		1:
 			hp = 1
@@ -25,7 +25,7 @@ func _ready():
 
 func _physics_process(delta):
 	position += angle*speed*delta
-	
+
 func enemy_hit(charge = 1):
 	hp -= charge
 	if hp <= 0:

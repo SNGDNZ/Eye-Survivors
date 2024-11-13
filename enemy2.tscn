@@ -98,6 +98,10 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_bwm5k")
 
+[node name="DisableTimer" parent="Hurtbox" index="1"]
+wait_time = 0.001
+one_shot = false
+
 [node name="Hitbox" parent="." instance=ExtResource("17_gfbpf")]
 collision_layer = 2
 collision_mask = 2
@@ -109,6 +113,7 @@ shape = SubResource("CircleShape2D_q8hds")
 stream = ExtResource("18_nl4mg")
 volume_db = -32.917
 pitch_scale = 1.33
+max_polyphony = 8
 
 [node name="EnemyHurtTimer" type="Timer" parent="."]
 wait_time = 0.1

@@ -14,11 +14,11 @@ func _on_hurtbox_hurt(damage):
 	sprite.play("hurt")
 	hp -= damage
 	enemy_hurt.play()
-	if hp <= 0:
-		queue_free()
 
 func _on_enemy_hurt_timer_timeout() -> void:
 	sprite.play("walk")
+	if hp <= 0:
+		queue_free()
 
 #MOVEMENT
 func _physics_process(delta: float):

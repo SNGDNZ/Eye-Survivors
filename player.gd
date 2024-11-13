@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var enemy = get_tree().get_first_node_in_group("enemy")
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var hurtbox = $Hurtbox
 @onready var health_bar = get_tree().get_first_node_in_group("player_health_bar")
@@ -28,6 +29,7 @@ var gun = preload("res://gun.tscn")
 #AttackNodes
 @onready var gun_timer = get_tree().get_first_node_in_group("gun_timer")
 @onready var gun_attack_timer = get_tree().get_first_node_in_group("gun_attack_timer")
+@onready var gun_enemy_detection_area = $EnemyDetectionArea
 
 #Gun
 var gun_ammo = 0
@@ -49,17 +51,22 @@ func _on_gun_timer_timeout() -> void:
 	gun_attack_timer.start()
 
 func _on_gun_attack_timer_timeout() -> void:
+	if gun_ammo < 0:
+		return
+	if isdead == true:
+		return
+	if gun_enemy_detection_area.has_overlapping_areas() == false:
+		return
+	var gun_attack = gun.instantiate()
+	gun_attack.position = position
+	gun_attack.target = get_random_target()
+	gun_attack.level = gun_level
+	add_child(gun_attack)
+	gun_ammo -= 1
 	if gun_ammo > 0:
-		var gun_attack = gun.instantiate()
-		gun_attack.position = position
-		gun_attack.target = get_random_target()
-		gun_attack.level = gun_level
-		add_child(gun_attack)
-		gun_ammo -= 1
-		if gun_ammo > 0:
-			gun_attack_timer.start()
-		else:
-			gun_attack_timer.stop()
+		gun_attack_timer.start()
+	else:
+		gun_attack_timer.stop()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -86,7 +93,7 @@ func _on_hurtbox_hurt(damage):
 		emit_signal("player_death")
 
 func _on_player_death():
-		var isdead = true
+		isdead = true
 		death_text.visible = true
 		death_text_timer.start()
 		death_sound.play()
