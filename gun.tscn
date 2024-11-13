@@ -1,82 +1,32 @@
-[gd_scene load_steps=12 format=3 uid="uid://dh660yysjfmso"]
+[gd_scene load_steps=5 format=3 uid="uid://dh660yysjfmso"]
 
-[ext_resource type="Script" path="res://gun.gd" id="1_nqo7t"]
-[ext_resource type="Texture2D" uid="uid://doqyr83qwx88r" path="res://Free/Items/Fruits/Collected.png" id="2_4xrke"]
-[ext_resource type="AudioStream" uid="uid://0hscd3qq2q1o" path="res://Free/Items/Fruits/Quick Reverb Fart - Sound Effect (HD).mp3" id="3_2y0jv"]
+[ext_resource type="Texture2D" uid="uid://byqtw2hnij7bm" path="res://Sprites/7-Objects/16-Enemy-Cannon/3-Cannon Ball/1.png" id="1_7f6j8"]
+[ext_resource type="Script" path="res://gun.gd" id="1_7xu0e"]
+[ext_resource type="AudioStream" uid="uid://cmghj7g01vnda" path="res://Sounds/gun_fire.mp3" id="3_2atcl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w6hmi"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6b82"]
 radius = 15.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mj205"]
-atlas = ExtResource("2_4xrke")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x2sdy"]
-atlas = ExtResource("2_4xrke")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rs1j8"]
-atlas = ExtResource("2_4xrke")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wbldn"]
-atlas = ExtResource("2_4xrke")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_32hlc"]
-atlas = ExtResource("2_4xrke")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7dk1k"]
-atlas = ExtResource("2_4xrke")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3gkqb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mj205")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x2sdy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rs1j8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wbldn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_32hlc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7dk1k")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
 [node name="Gun" type="Area2D" groups=["attack"]]
+top_level = true
+light_mask = 4
+visibility_layer = 4
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_nqo7t")
+script = ExtResource("1_7xu0e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7f6j8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-top_level = true
-shape = SubResource("CircleShape2D_w6hmi")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_3gkqb")
-animation = &"move"
-autoplay = "move"
+shape = SubResource("CircleShape2D_r6b82")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 7.0
+one_shot = true
+autostart = true
 
-[node name="snd_play" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_2y0jv")
-volume_db = -37.864
+[node name="GunFire" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2atcl")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

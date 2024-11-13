@@ -12,17 +12,70 @@ extends CharacterBody2D
 @export var speed = 400
 @export var hp = 50
 
-
 var isdead = false
 
 signal player_death()
 
-#HEALTH
 func _ready():
+	attack()
 	health_bar.value = hp
 	death_text.visible = false
 	isdead = false
 
+#ATTACKS
+var gun = preload("res://gun.tscn")
+
+#AttackNodes
+@onready var gun_timer = get_tree().get_first_node_in_group("gun_timer")
+@onready var gun_attack_timer = get_tree().get_first_node_in_group("gun_attack_timer")
+
+#Gun
+var gun_ammo = 0
+var gun_baseammo = 1
+var gun_attackspeed = 0.2
+var gun_level = 1
+
+#Enemy Related
+var enemy_close = []
+
+func attack():
+	if gun_level > 0:
+		gun_timer.wait_time = gun_attackspeed
+		if gun_timer.is_stopped():
+			gun_timer.start()
+
+func _on_gun_timer_timeout() -> void:
+	gun_ammo += gun_baseammo
+	gun_attack_timer.start()
+
+func _on_gun_attack_timer_timeout() -> void:
+	if gun_ammo > 0:
+		var gun_attack = gun.instantiate()
+		gun_attack.position = position
+		gun_attack.target = get_random_target()
+		gun_attack.level = gun_level
+		add_child(gun_attack)
+		gun_ammo -= 1
+		if gun_ammo > 0:
+			gun_attack_timer.start()
+		else:
+			gun_attack_timer.stop()
+
+func get_random_target():
+	if enemy_close.size() > 0:
+		return enemy_close.pick_random().global_position
+	else:
+		return Vector2.UP
+
+func _on_enemy_detection_area_body_entered(body):
+	if not enemy_close.has(body):
+		enemy_close.append(body)
+
+func _on_enemy_detection_area_body_exited(body):
+	if enemy_close.has(body):
+		enemy_close.erase(body)
+
+#HEALTH
 func _on_hurtbox_hurt(damage):
 	hp -= damage
 	health_bar.value = hp
@@ -39,8 +92,6 @@ func _on_player_death():
 		death_sound.play()
 		hurtbox.queue_free()
 		speed = 0
-
-
 
 #MOVEMENT
 func movement():
