@@ -10,7 +10,7 @@ extends CharacterBody2D
 @onready var death_sound = $PlayerDeath
 @onready var death_text = get_tree().get_first_node_in_group("you_died_text")
 @onready var death_text_timer = get_tree().get_first_node_in_group("death_text_timer")
-@export var speed = 400
+@export var speed = 300
 @export var hp = 50
 
 var isdead = false
@@ -34,7 +34,7 @@ var gun = preload("res://gun.tscn")
 #Gun
 var gun_ammo = 0
 var gun_baseammo = 1
-var gun_attackspeed = 0.2
+var gun_attackspeed = 0.3
 var gun_level = 1
 
 #Enemy Related
