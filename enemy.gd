@@ -17,7 +17,6 @@ func _on_hurtbox_hurt(damage, angle, knockback_amount):
 	hp -= damage
 	enemy_hurt.play()
 	knockback = angle * knockback_amount
-	
 
 func _on_enemy_hurt_timer_timeout() -> void:
 	sprite.play("walk")

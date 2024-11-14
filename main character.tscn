@@ -63,6 +63,8 @@ radius = 540.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 top_level = true
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(574, 323)
 collision_layer = 2
 script = ExtResource("1_goanb")
@@ -102,11 +104,9 @@ volume_db = -22.795
 
 [node name="Attack" type="Node2D" parent="."]
 
-[node name="GunTimer" type="Timer" parent="Attack" groups=["gun_timer"]]
-wait_time = 0.01
-
-[node name="GunAttackTimer" type="Timer" parent="Attack/GunTimer" groups=["gun_attack_timer"]]
-wait_time = 0.5
+[node name="GunAttackTimer" type="Timer" parent="Attack" groups=["gun_attack_timer"]]
+wait_time = 0.2
+autostart = true
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 position = Vector2(-574, -323)
@@ -123,8 +123,7 @@ pitch_scale = 1.55
 
 [connection signal="player_death" from="." to="." method="_on_player_death"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
-[connection signal="timeout" from="Attack/GunTimer" to="." method="_on_gun_timer_timeout"]
-[connection signal="timeout" from="Attack/GunTimer/GunAttackTimer" to="." method="_on_gun_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/GunAttackTimer" to="." method="_on_gun_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 

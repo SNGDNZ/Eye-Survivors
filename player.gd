@@ -13,6 +13,14 @@ extends CharacterBody2D
 @export var speed = 300
 @export var hp = 50
 
+#UTILITY
+func _input(event):
+	if event.is_action_pressed("t") and not isdead:
+		emit_signal("player_death")
+	if event.is_action_pressed("r"):
+		get_tree().reload_current_scene()
+
+
 var isdead = false
 
 signal player_death()
@@ -32,27 +40,13 @@ var gun = preload("res://gun.tscn")
 @onready var gun_enemy_detection_area = $EnemyDetectionArea
 
 #Gun
-var gun_ammo = 0
-var gun_baseammo = 1
-var gun_attackspeed = 0.5
+var gun_attackspeed = 0.2
 var gun_level = 1
 
 #Enemy Related
 var enemy_close = []
 
 func attack():
-	if gun_level > 0:
-		gun_timer.wait_time = gun_attackspeed
-		if gun_timer.is_stopped():
-			gun_timer.start()
-
-func _on_gun_timer_timeout() -> void:
-	gun_ammo += gun_baseammo
-	gun_attack_timer.start()
-
-func _on_gun_attack_timer_timeout() -> void:
-	if gun_ammo < 0:
-		return
 	if isdead == true:
 		return
 	if enemy_close.size() <= 0:
@@ -62,11 +56,13 @@ func _on_gun_attack_timer_timeout() -> void:
 	gun_attack.target = get_random_target()
 	gun_attack.level = gun_level
 	add_child(gun_attack)
-	gun_ammo -= 1
-	if gun_ammo > 0:
+	gun_attack_timer.start()
+
+func _on_gun_attack_timer_timeout() -> void:
+	if gun_level > 0:
+		gun_attack_timer.wait_time = gun_attackspeed
+		attack()
 		gun_attack_timer.start()
-	else:
-		gun_attack_timer.stop()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -94,11 +90,14 @@ func _on_hurtbox_hurt(damage, _angle, _knockback):
 
 func _on_player_death():
 		isdead = true
+		hp = 0
+		health_bar.value = hp
 		death_text.visible = true
 		death_text_timer.start()
 		death_sound.play()
 		hurtbox.queue_free()
-		speed = 0
+		sprite.play("idle")
+		velocity = Vector2.ZERO
 
 #MOVEMENT
 func movement():

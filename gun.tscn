@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cmghj7g01vnda" path="res://Sounds/gun_fire.mp3" id="3_2atcl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6b82"]
-radius = 15.0
+radius = 12.0
 
 [node name="Gun" type="Area2D" groups=["attack"]]
 top_level = true
@@ -16,6 +16,7 @@ collision_mask = 4
 script = ExtResource("1_7xu0e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_7f6j8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
