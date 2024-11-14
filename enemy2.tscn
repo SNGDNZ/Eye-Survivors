@@ -17,8 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://cbcxvstvs3g7v" path="res://Sprites/6-Enemy-Whale/8-Swalow (Bomb)/9.png" id="24_ivesm"]
 [ext_resource type="Texture2D" uid="uid://bljnkgcd43ts3" path="res://Sprites/6-Enemy-Whale/8-Swalow (Bomb)/10.png" id="25_r81bj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dswj"]
-size = Vector2(30, 30)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wj1l7"]
+radius = 24.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wstes"]
 animations = [{
@@ -85,7 +85,7 @@ collision_mask = 7
 script = ExtResource("1_7o8jv")
 
 [node name="Body" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_4dswj")
+shape = SubResource("CircleShape2D_wj1l7")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -3)
@@ -120,6 +120,7 @@ max_polyphony = 8
 [node name="EnemyHurtTimer" type="Timer" parent="."]
 wait_time = 0.1
 
+[connection signal="enemy_death" from="." to="." method="_on_enemy_death"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="EnemyHurtTimer" to="." method="_on_enemy_hurt_timer_timeout"]
 

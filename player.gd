@@ -20,7 +20,6 @@ func _input(event):
 	if event.is_action_pressed("r"):
 		get_tree().reload_current_scene()
 
-
 var isdead = false
 
 signal player_death()
@@ -47,7 +46,7 @@ var gun_level = 1
 var enemy_close = []
 
 func attack():
-	if isdead == true:
+	if isdead:
 		return
 	if enemy_close.size() <= 0:
 		return
@@ -67,8 +66,7 @@ func _on_gun_attack_timer_timeout() -> void:
 func get_random_target():
 	if enemy_close.size() > 0:
 		return enemy_close.pick_random().global_position
-	else:
-		return Vector2.UP
+	return Vector2.UP
 
 func _on_enemy_detection_area_body_entered(body):
 	if not enemy_close.has(body):
