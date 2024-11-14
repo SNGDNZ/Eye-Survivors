@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://n2ic0gsguuw5"]
+[gd_scene load_steps=19 format=3 uid="uid://n2ic0gsguuw5"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_goanb"]
 [ext_resource type="Texture2D" uid="uid://ddrqgifi1ofrt" path="res://skeletal rooboid walking sprite.png" id="2_cur0v"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bx7pu8ex0cyp3" path="res://Sounds/player_hurt.mp3" id="5_vfjov"]
 [ext_resource type="AudioStream" uid="uid://dg6hrf8ltu6i8" path="res://Sounds/player_death.mp3" id="6_54wa6"]
 [ext_resource type="AudioStream" uid="uid://crcoluyyhhy3" path="res://Sounds/enemy_hurt.mp3" id="7_gv5am"]
+[ext_resource type="AudioStream" uid="uid://m5lfh6qiqacw" path="res://Cartoon Boing Sound Effect 2.mp3" id="8_l4mf5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bker8"]
 atlas = ExtResource("2_cur0v")
@@ -60,6 +61,12 @@ radius = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3l3tw"]
 radius = 540.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ru1dr"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1gat3"]
+radius = 15.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 top_level = true
@@ -121,10 +128,32 @@ stream = ExtResource("7_gv5am")
 volume_db = -31.701
 pitch_scale = 1.55
 
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_ru1dr")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_1gat3")
+
+[node name="LevelUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_l4mf5")
+volume_db = -16.22
+pitch_scale = 0.16
+
 [connection signal="player_death" from="." to="." method="_on_player_death"]
+[connection signal="player_hurt" from="." to="." method="_on_player_hurt"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="Attack/GunAttackTimer" to="." method="_on_gun_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="Hurtbox"]

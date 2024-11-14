@@ -16,7 +16,13 @@ func _on_area_entered(area):
 					collision.call_deferred("set", "disabled", true)
 					disable_timer.start()
 				1: #HitOnce
-					pass
+					if hit_once_array.has(area) == false:
+						hit_once_array.append(area)
+						if area.has_signal("remove_from_array"):
+							if not area.is_connected("remove_from_array",Callable(self,"remove_from_list")):
+								area.connect("remove_from_array",Callable(self,"remove_from_list"))
+					else:
+						return
 				2: #DisableHitbox
 					if area.has_method("temp_disable"):
 						area.temp_disable()
@@ -30,6 +36,10 @@ func _on_area_entered(area):
 			emit_signal("hurt",damage,angle,knockback)
 			if area.has_method("enemy_hit"):
 				area.enemy_hit(1)
+
+func remove_from_list(object):
+	if hit_once_array.has(object):
+		hit_once_array.erase(object)
 
 func _on_disable_timer_timeout():
 	collision.call_deferred("set", "disabled", false)

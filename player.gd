@@ -10,8 +10,19 @@ extends CharacterBody2D
 @onready var death_sound = $PlayerDeath
 @onready var death_text = get_tree().get_first_node_in_group("you_died_text")
 @onready var death_text_timer = get_tree().get_first_node_in_group("death_text_timer")
+@onready var level_display = get_tree().get_first_node_in_group("level_display")
 @export var speed = 300
 @export var hp = 50
+@onready var level_up_sound = $LevelUp
+
+var isdead = false
+
+var xp_amt = 0
+var xp_level = 1
+var xp_collected = 0
+
+signal player_hurt()
+signal player_death()
 
 #UTILITY
 func _input(event):
@@ -19,10 +30,6 @@ func _input(event):
 		emit_signal("player_death")
 	if event.is_action_pressed("r"):
 		get_tree().reload_current_scene()
-
-var isdead = false
-
-signal player_death()
 
 func _ready():
 	attack()
@@ -77,17 +84,22 @@ func _on_enemy_detection_area_body_exited(body):
 		enemy_close.erase(body)
 
 #HEALTH
+
 func _on_hurtbox_hurt(damage, _angle, _knockback):
 	hp -= damage
-	health_bar.value = hp
 	if hp > 0:
-		hurt_sound.play()
-		hurt_sound.pitch_scale = randf_range(0.9, 1.1)
+		emit_signal("player_hurt")
 	else:
 		emit_signal("player_death")
 
+func _on_player_hurt() -> void:
+	health_bar.value = hp
+	hurt_sound.pitch_scale = randf_range(0.9, 1.1)
+	hurt_sound.play()
+
 func _on_player_death():
 		isdead = true
+		print("isdead")
 		hp = 0
 		health_bar.value = hp
 		death_text.visible = true
@@ -98,6 +110,7 @@ func _on_player_death():
 		velocity = Vector2.ZERO
 
 #MOVEMENT
+
 func movement():
 	if hp <= 0:
 		return
@@ -116,3 +129,40 @@ func movement():
 func _physics_process(delta):
 	movement()
 	move_and_slide()
+
+#XP related
+func _on_grab_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("loot"):
+		area.target = self
+
+
+func _on_collect_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("loot"):
+		var gem_xp = area.collect()
+		calculate_xp(gem_xp)
+
+func calculate_xp(gem_xp):
+	var xp_required = calculate_xp_cap()
+	xp_collected += gem_xp
+	if xp_amt + xp_collected >= xp_required: #Level up
+		xp_collected -= xp_required-xp_amt
+		xp_level += 1
+		level_display.text = str("Level ",xp_level)
+		level_up_sound.play()
+		xp_amt = 0
+		xp_required = calculate_xp_cap()
+		calculate_xp(0)
+	else:
+		xp_amt += xp_collected
+		xp_collected = 0
+
+func calculate_xp_cap():
+	var xp_cap = xp_level
+	if xp_level < 20:
+		xp_cap = xp_level*5
+	elif xp_level < 40:
+		xp_cap + 95 * (xp_level-19)*8
+	else:
+		xp_cap = 255 + (xp_level-39)*12
+		
+	return xp_cap
