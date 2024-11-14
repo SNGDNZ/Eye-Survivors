@@ -6,7 +6,7 @@ var level = 1
 var hp = 1
 var speed = 500
 var damage = 20
-var knock_amount = 100
+var knockback_amount = 200
 var attack_size = 1.0
 
 var target = Vector2.ZERO
@@ -19,8 +19,8 @@ func _ready():
 		1:
 			hp = 1
 			speed = 500
-			damage = 10
-			knock_amount = 100
+			damage = 20
+			knockback_amount = 200
 			attack_size = 1.0
 
 func _physics_process(delta):

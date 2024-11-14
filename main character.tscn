@@ -103,10 +103,10 @@ volume_db = -22.795
 [node name="Attack" type="Node2D" parent="."]
 
 [node name="GunTimer" type="Timer" parent="Attack" groups=["gun_timer"]]
-wait_time = 0.05
+wait_time = 0.01
 
 [node name="GunAttackTimer" type="Timer" parent="Attack/GunTimer" groups=["gun_attack_timer"]]
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 position = Vector2(-574, -323)

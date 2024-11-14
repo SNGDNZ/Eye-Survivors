@@ -34,7 +34,7 @@ var gun = preload("res://gun.tscn")
 #Gun
 var gun_ammo = 0
 var gun_baseammo = 1
-var gun_attackspeed = 0.3
+var gun_attackspeed = 0.5
 var gun_level = 1
 
 #Enemy Related
@@ -55,7 +55,7 @@ func _on_gun_attack_timer_timeout() -> void:
 		return
 	if isdead == true:
 		return
-	if gun_enemy_detection_area.has_overlapping_areas() == false:
+	if enemy_close.size() <= 0:
 		return
 	var gun_attack = gun.instantiate()
 	gun_attack.position = position
@@ -83,7 +83,7 @@ func _on_enemy_detection_area_body_exited(body):
 		enemy_close.erase(body)
 
 #HEALTH
-func _on_hurtbox_hurt(damage):
+func _on_hurtbox_hurt(damage, _angle, _knockback):
 	hp -= damage
 	health_bar.value = hp
 	if hp > 0:
