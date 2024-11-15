@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var xp_crystal = preload("res://exp_crystal.tscn")
+@onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $Sprite
 @onready var enemy_hurt_sound = $EnemyHurt
 @onready var enemy_death_sound = $EnemyDeath
@@ -9,7 +9,9 @@ extends CharacterBody2D
 @export var speed = 200
 @export var hp = 20
 @export var knockback_recovery = 3.5
+@export var experience = 1
 var knockback = Vector2.ZERO
+var xp_gem = preload("res://exp_crystal.tscn")
 
 signal enemy_death()
 signal xp_spawn()
@@ -37,7 +39,11 @@ func _on_enemy_death() -> void:
 	emit_signal("remove_from_array",self)
 	queue_free()
 
-
+func _on_xp_spawn() -> void:
+	var new_gem = xp_gem.instantiate()
+	new_gem.global_position = global_position
+	new_gem.xp_amount = experience
+	loot_base.call_deferred("add_child", new_gem)
 
 #MOVEMENT
 func _physics_process(delta: float):

@@ -83,4 +83,15 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Level 1"
 
+[node name="XpBar" type="ProgressBar" parent="." groups=["xp_bar"]]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 27.0
+grow_horizontal = 2
+show_percentage = false
+
 [connection signal="timeout" from="DeathTextTimer" to="." method="_on_death_text_timer_timeout"]

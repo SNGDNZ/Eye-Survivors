@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var death_text = get_tree().get_first_node_in_group("you_died_text")
 @onready var death_text_timer = get_tree().get_first_node_in_group("death_text_timer")
 @onready var level_display = get_tree().get_first_node_in_group("level_display")
+@onready var xp_bar = get_tree().get_first_node_in_group("xp_bar")
 @export var speed = 300
 @export var hp = 50
 @onready var level_up_sound = $LevelUp
@@ -34,6 +35,7 @@ func _input(event):
 func _ready():
 	attack()
 	health_bar.value = hp
+	set_xpbar(xp_amt, calculate_xp_cap())
 	death_text.visible = false
 	isdead = false
 
@@ -149,12 +151,14 @@ func calculate_xp(gem_xp):
 		xp_level += 1
 		level_display.text = str("Level ",xp_level)
 		level_up_sound.play()
+		
 		xp_amt = 0
 		xp_required = calculate_xp_cap()
 		calculate_xp(0)
 	else:
 		xp_amt += xp_collected
 		xp_collected = 0
+	set_xpbar(xp_amt, xp_required)
 
 func calculate_xp_cap():
 	var xp_cap = xp_level
@@ -164,5 +168,8 @@ func calculate_xp_cap():
 		xp_cap + 95 * (xp_level-19)*8
 	else:
 		xp_cap = 255 + (xp_level-39)*12
-		
 	return xp_cap
+
+func set_xpbar(set_value = 1, set_max_value = 100):
+	xp_bar.value = set_value
+	xp_bar.max_value = set_max_value

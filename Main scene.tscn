@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c06jc5mjidcdl"]
+[gd_scene load_steps=7 format=3 uid="uid://c06jc5mjidcdl"]
 
 [ext_resource type="Texture2D" uid="uid://cokrx24sx58rl" path="res://32rogues/tiles.png" id="2_6b46f"]
 [ext_resource type="PackedScene" uid="uid://n2ic0gsguuw5" path="res://main character.tscn" id="3_k660c"]
 [ext_resource type="PackedScene" uid="uid://co5llfp8c8u5o" path="res://hud.tscn" id="4_x2cph"]
-[ext_resource type="PackedScene" uid="uid://cbcqg27ccqf3l" path="res://exp_crystal.tscn" id="5_2lulr"]
 [ext_resource type="PackedScene" uid="uid://80gy3m13ao0k" path="res://spawner.tscn" id="5_km2rm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_28ru1"]
@@ -145,9 +144,7 @@ position = Vector2(303, 541)
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_x2cph")]
 
-[node name="Loot" type="Node2D" parent="."]
-
-[node name="xp_crystal" parent="Loot" instance=ExtResource("5_2lulr")]
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
 [editable path="player"]
 [editable path="player/Hurtbox"]
