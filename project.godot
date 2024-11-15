@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="rofgye like dick builder"
-run/main_scene="res://Main scene.tscn"
+config/name="eye survivors"
+run/main_scene="res://Resources/Main scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Events="*res://GlobalResources/events.gd"
 
 [input]
 

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh660yysjfmso"]
+
+[ext_resource type="Texture2D" uid="uid://byqtw2hnij7bm" path="res://Sprites/7-Objects/16-Enemy-Cannon/3-Cannon Ball/1.png" id="1_7f6j8"]
+[ext_resource type="Script" path="res://Resources/gun.gd" id="1_7xu0e"]
+[ext_resource type="AudioStream" uid="uid://cmghj7g01vnda" path="res://Sounds/gun_fire.mp3" id="3_2atcl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6b82"]
+radius = 12.0
+
+[node name="Gun" type="Area2D" groups=["attack"]]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_7xu0e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_7f6j8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r6b82")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+autostart = true
+
+[node name="GunFire" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2atcl")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_as_relative = false
+amount = 10
+lifetime = 0.2
+randomness = 0.67
+lifetime_randomness = 0.54
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+initial_velocity_max = 50.51
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
