@@ -10,6 +10,7 @@ extends Control
 
 @onready var upgrade_options = get_node("LevelUp/%UpgradeOptions")
 @onready var level_up_sound = get_node("LevelUp/%LevelUpSound")
+@onready var level_up_panel = $LevelUp
 
 func _ready():
 	Events.level_up.connect(_on_player_level_up)
@@ -21,3 +22,4 @@ func _on_death_text_timer_timeout() -> void:
 func _on_player_level_up():
 	level_up_sound.play()
 	upgrade_options.visible
+	print("levelup")

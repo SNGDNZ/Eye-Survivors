@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://GlobalResources/events.gd"
+XpHandler="*res://GlobalResources/xp_handler.gd"
 
 [input]
 

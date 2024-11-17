@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var speed = 200
 @export var hp = 20
 @export var knockback_recovery = 3.5
-@export var experience = 1
+@export var experience = 0
 
 var knockback = Vector2.ZERO
 var xp_gem = preload("res://Resources/exp_crystal.tscn")
@@ -43,7 +43,7 @@ func _on_enemy_death() -> void:
 func _on_xp_spawn() -> void:
 	var new_gem = xp_gem.instantiate()
 	new_gem.global_position = global_position
-	new_gem.xp_amount = experience
+	new_gem.xp_worth = experience
 	loot_base.call_deferred("add_child", new_gem)
 
 #MOVEMENT

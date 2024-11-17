@@ -8,7 +8,10 @@ signal hurt(damage, angle, knockback)
 
 #PLAYER
 signal player_death()
+
+#XP HANDLER
 signal level_up()
+signal calculate_xp(gem_xp)
 
 func _input(event):
 	if event.is_action_pressed("t"):

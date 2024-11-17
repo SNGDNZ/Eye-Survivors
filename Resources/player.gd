@@ -27,7 +27,6 @@ signal player_death()
 func _ready():
 	attack()
 	health_bar.value = hp
-	set_xpbar(xp_amt, calculate_xp_cap())
 	death_text.visible = false
 	isdead = false
 
@@ -78,7 +77,7 @@ func _on_enemy_detection_area_body_exited(body):
 		enemy_close.erase(body)
 
 #HEALTH
-func _on_hurtbox_hurt(damage, _angle, _knockback):
+func _on_hurtbox_hurt(damage, _angle, _knockback_amount):
 	hp -= damage
 	if hp > 0:
 		emit_signal("player_hurt")
@@ -130,34 +129,5 @@ func _on_grab_area_area_entered(area: Area2D) -> void:
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
 		var gem_xp = area.collect()
-		calculate_xp(gem_xp)
-
-func calculate_xp(gem_xp):
-	var xp_required = calculate_xp_cap()
-	xp_collected += gem_xp
-	if xp_amt + xp_collected >= xp_required: #Level up
-		xp_collected -= xp_required-xp_amt
-		xp_level += 1
-		level_display.text = str("Level ",xp_level)
-		xp_amt = 0
-		xp_required = calculate_xp_cap()
-		Events.level_up.emit()
-		calculate_xp(0)
-	else:
-		xp_amt += xp_collected
-		xp_collected = 0
-	set_xpbar(xp_amt, xp_required)
-
-func calculate_xp_cap():
-	var xp_cap = xp_level
-	if xp_level < 20:
-		xp_cap = xp_level*5
-	elif xp_level < 40:
-		xp_cap + 95 * (xp_level-19)*8
-	else:
-		xp_cap = 255 + (xp_level-39)*12
-	return xp_cap
-
-func set_xpbar(set_value = 1, set_max_value = 100):
-	xp_bar.value = set_value
-	xp_bar.max_value = set_max_value
+		Events.calculate_xp.emit(gem_xp)
+		print ("player_xp_emit")

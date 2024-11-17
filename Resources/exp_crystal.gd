@@ -10,15 +10,15 @@ extends Area2D
 @onready var collision = $CollisionShape2D
 @onready var xp_sound = $XpSound
 
-@export var xp_amount = 1
+@export var xp_worth = 1
 
 var target = null
 var speed = -2
 
 func _ready():
-	if xp_amount <5:
-		return
-	elif xp_amount <25:
+	if xp_worth <5:
+		sprite.texture = blue_xp
+	elif xp_worth <25:
 		sprite.texture = pink_xp
 	else:
 		sprite.texture = red_xp
@@ -32,7 +32,7 @@ func collect():
 	xp_sound.play()
 	collision.call_deferred("set", "disabled", true)
 	sprite.visible = false
-	return xp_amount
+	return xp_worth
 
 func _on_xp_sound_finished() -> void:
 	queue_free()
