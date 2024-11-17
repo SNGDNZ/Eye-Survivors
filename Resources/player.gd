@@ -25,7 +25,7 @@ signal player_hurt()
 signal player_death()
 
 func _ready():
-	attack()
+	gun_attack()
 	health_bar.value = hp
 	death_text.visible = false
 	isdead = false
@@ -45,7 +45,7 @@ var gun_level = 1
 #ENEMY RELATED
 var enemy_close = []
 
-func attack():
+func gun_attack():
 	if isdead:
 		return
 	if enemy_close.size() <= 0:
@@ -60,7 +60,7 @@ func attack():
 func _on_gun_attack_timer_timeout() -> void:
 	if gun_level > 0:
 		gun_attack_timer.wait_time = gun_attackspeed
-		attack()
+		gun_attack()
 		gun_attack_timer.start()
 
 func get_random_target():
