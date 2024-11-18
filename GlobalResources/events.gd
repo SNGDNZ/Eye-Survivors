@@ -13,6 +13,7 @@ signal player_death()
 #XP HANDLER
 signal level_up()
 signal calculate_xp(gem_xp)
+signal selected_upgrade()
 
 func _input(event):
 	if event.is_action_pressed("t"):

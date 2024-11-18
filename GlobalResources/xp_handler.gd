@@ -22,19 +22,19 @@ func _on_calculate_xp(gem_xp):
 		xp_amt = 0
 		xp_required = calculate_xp_cap()
 		Events.level_up.emit()
-		_on_calculate_xp(0)
 	else:
 		xp_amt += xp_collected
+		xp_collected = 0
 	set_xpbar(xp_amt, xp_required)
 
 func calculate_xp_cap():
 	var xp_cap = xp_level
 	if xp_level < 20:
-		xp_cap = xp_level*7
+		xp_cap = xp_level*7 + 4
 	elif xp_level < 40:
-		xp_cap + 95 * (xp_level-19)*11
+		xp_cap + 95 * (xp_level-19)*11 + 8
 	else:
-		xp_cap = 255 + (xp_level-39)*13
+		xp_cap = 255 + (xp_level-39)*13 + 16
 	return xp_cap
 
 func set_xpbar(set_value = 1, set_max_value = 100):

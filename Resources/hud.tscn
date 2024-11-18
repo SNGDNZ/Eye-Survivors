@@ -81,7 +81,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -576.0
 offset_right = 576.0
-offset_bottom = 27.0
+offset_bottom = 23.0
 grow_horizontal = 2
 show_percentage = false
 
@@ -98,27 +98,27 @@ grow_horizontal = 2
 text = "Level 1"
 
 [node name="LevelUp" type="Panel" parent="."]
-visible = false
+process_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -200.0
-offset_right = 150.0
-offset_bottom = 200.0
+offset_left = -200.0
+offset_top = 776.0
+offset_right = 200.0
+offset_bottom = 1376.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UpgradeOptions" type="VBoxContainer" parent="LevelUp"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = -426.0
-offset_top = -124.0
-offset_right = -386.0
-offset_bottom = -84.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 350.0
+offset_bottom = 150.0
 
 [node name="LevelUpSound" type="AudioStreamPlayer" parent="LevelUp"]
 unique_name_in_owner = true

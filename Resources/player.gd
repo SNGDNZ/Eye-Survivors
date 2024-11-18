@@ -77,47 +77,18 @@ func _physics_process(_delta):
 
 #ATTACKS
 var gun = preload("res://Resources/gun.tscn")
-var orb = preload("res://Resources/orb.tscn")
+
 
 @onready var gun_attack_timer = get_tree().get_first_node_in_group("gun_attack_timer")
 @onready var gun_enemy_detection_area = $EnemyDetectionArea
 @onready var gun_fire_sound = $Gun/GunFire
 
-@onready var orb_attack_timer = $Orb/OrbAttackTimer
-@onready var orb_float_timer = $Orb/OrbFloatTimer
-@onready var orb_tick_timer = $Orb/OrbTickTimer
-@onready var orb_fire_sound = $Orb/OrbFire
-@onready var orb_impact_sound = $Orb/OrbImpact
-
-var orb_float_target = Vector2.ZERO
 var orb_angle = Vector2.ZERO
-var orb_tick_amount = 0
 
 #ENEMY RELATED
 var enemy_close = []
 
 #ORB
-var orb_attack_speed = 0.2
-var orb_level = 1
-
-func _process(delta):
-	if Input.is_action_just_pressed("click"):
-		print ("click")
-		orb_attack()
-
-func orb_attack():
-	print ("orb_attack")
-	if isdead:
-		return
-	#if orb_attack_timer.is_stopped = false:
-		#return
-	var orb_attack = orb.instantiate()
-	orb_attack.target = get_global_mouse_position()
-	orb_attack.level = orb_level
-	orb_attack_timer.wait_time = orb_attack_speed
-	add_child(orb_attack)
-	orb_attack_timer.start()
-	orb_float_timer.start()
 
 #GUN
 var gun_attackspeed = 0.2

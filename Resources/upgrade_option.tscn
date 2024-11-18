@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb10dexbgplab"]
+
+[ext_resource type="Script" path="res://Resources/upgrade_option.gd" id="1_c0g2i"]
+[ext_resource type="Texture2D" uid="uid://cfrmypcpmt8wf" path="res://Sprites/7-Objects/5-Exclamation Dialog/2-Closing/1.png" id="2_742v4"]
+
+[node name="UpgradeOption" type="ColorRect"]
+process_mode = 2
+custom_minimum_size = Vector2(300, 166)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.775867, 0.593563, 0.592607, 1)
+script = ExtResource("1_c0g2i")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 90.0
+offset_bottom = 90.0
+
+[node name="UpgradeIcon" type="TextureRect" parent="ColorRect"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("2_742v4")
+
+[node name="LabelUpgradeTitle" type="Label" parent="."]
+custom_minimum_size = Vector2(190, 40)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 20
+text = "UpgradeName: lvl"
+
+[node name="LabelUpgradeDesc" type="Label" parent="."]
+custom_minimum_size = Vector2(190, 40)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 290.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 12
+text = "upgradedesc, upgradedesc, upgradedesc, "
+autowrap_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
