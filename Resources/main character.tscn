@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://n2ic0gsguuw5"]
+[gd_scene load_steps=19 format=3 uid="uid://n2ic0gsguuw5"]
 
 [ext_resource type="Script" path="res://Resources/player.gd" id="1_goanb"]
 [ext_resource type="Texture2D" uid="uid://ddrqgifi1ofrt" path="res://Sprites/player/run/skeletal rooboid walking sprite.png" id="2_cur0v"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bx7pu8ex0cyp3" path="res://Sounds/player_hurt.mp3" id="5_vfjov"]
 [ext_resource type="AudioStream" uid="uid://dg6hrf8ltu6i8" path="res://Sounds/player_death.mp3" id="6_54wa6"]
 [ext_resource type="AudioStream" uid="uid://crcoluyyhhy3" path="res://Sounds/enemy_hurt.mp3" id="7_gv5am"]
+[ext_resource type="AudioStream" uid="uid://c2tpc6opigdo2" path="res://Sounds/orb_impact.mp3" id="8_2ue40"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bker8"]
 atlas = ExtResource("2_cur0v")
@@ -108,12 +109,6 @@ pitch_scale = 1.62
 stream = ExtResource("6_54wa6")
 volume_db = -22.795
 
-[node name="Attack" type="Node2D" parent="."]
-
-[node name="GunAttackTimer" type="Timer" parent="Attack" groups=["gun_attack_timer"]]
-wait_time = 0.2
-autostart = true
-
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 position = Vector2(-574, -323)
 collision_mask = 4
@@ -121,11 +116,6 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" groups=["enemy"]]
 position = Vector2(574, 323)
 shape = SubResource("CircleShape2D_3l3tw")
-
-[node name="GunFire" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_gv5am")
-volume_db = -31.701
-pitch_scale = 1.55
 
 [node name="GrabArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -141,13 +131,46 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("CircleShape2D_1gat3")
 
+[node name="Gun" type="Node2D" parent="."]
+
+[node name="GunAttackTimer" type="Timer" parent="Gun" groups=["gun_attack_timer"]]
+wait_time = 0.2
+autostart = true
+
+[node name="GunFire" type="AudioStreamPlayer" parent="Gun"]
+stream = ExtResource("7_gv5am")
+volume_db = -31.701
+pitch_scale = 1.55
+
+[node name="Orb" type="Node2D" parent="."]
+
+[node name="OrbAttackTimer" type="Timer" parent="Orb"]
+one_shot = true
+
+[node name="OrbFloatTimer" type="Timer" parent="Orb"]
+wait_time = 0.5
+one_shot = true
+
+[node name="OrbTickTimer" type="Timer" parent="Orb"]
+wait_time = 0.3
+one_shot = true
+
+[node name="OrbFire" type="AudioStreamPlayer" parent="Orb"]
+
+[node name="OrbImpact" type="AudioStreamPlayer" parent="Orb"]
+stream = ExtResource("8_2ue40")
+volume_db = -41.027
+pitch_scale = 0.73
+
 [connection signal="player_death" from="." to="." method="_on_player_death"]
 [connection signal="player_hurt" from="." to="." method="_on_player_hurt"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
-[connection signal="timeout" from="Attack/GunAttackTimer" to="." method="_on_gun_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
+[connection signal="timeout" from="Gun/GunAttackTimer" to="." method="_on_gun_attack_timer_timeout"]
+[connection signal="timeout" from="Orb/OrbFloatTimer" to="." method="_on_orb_float_timer_timeout"]
+[connection signal="timeout" from="Orb/OrbTickTimer" to="." method="_on_orb_tick_timer_timeout"]
 
 [editable path="Hurtbox"]

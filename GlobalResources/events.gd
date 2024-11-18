@@ -9,6 +9,8 @@ signal hurt(damage, angle, knockback)
 #PLAYER
 signal player_death()
 
+signal orb_tick(_on_orb_tick)
+
 #XP HANDLER
 signal level_up()
 signal calculate_xp(gem_xp)

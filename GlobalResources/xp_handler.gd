@@ -30,11 +30,11 @@ func _on_calculate_xp(gem_xp):
 func calculate_xp_cap():
 	var xp_cap = xp_level
 	if xp_level < 20:
-		xp_cap = xp_level*5
+		xp_cap = xp_level*7
 	elif xp_level < 40:
-		xp_cap + 95 * (xp_level-19)*8
+		xp_cap + 95 * (xp_level-19)*11
 	else:
-		xp_cap = 255 + (xp_level-39)*12
+		xp_cap = 255 + (xp_level-39)*13
 	return xp_cap
 
 func set_xpbar(set_value = 1, set_max_value = 100):
