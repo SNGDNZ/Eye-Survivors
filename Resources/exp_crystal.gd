@@ -13,7 +13,7 @@ extends Area2D
 @export var xp_worth = 1
 
 var target = null
-var speed = -2
+var speed = -4
 
 func _ready():
 	if xp_worth <5:

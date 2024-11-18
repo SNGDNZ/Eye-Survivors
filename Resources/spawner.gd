@@ -2,7 +2,7 @@ extends Node2D
 
 @export var spawns: Array[SpawnInfo] = []
 @onready var player = get_tree().get_first_node_in_group("player")
-@export var enemy_max:int
+@export var enemy_max: int
 
 var time = 0
 

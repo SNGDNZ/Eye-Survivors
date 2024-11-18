@@ -110,22 +110,14 @@ func orb_attack():
 	if isdead:
 		return
 	#if orb_attack_timer.is_stopped = false:
-		return
+		#return
 	var orb_attack = orb.instantiate()
-	orb_attack.position = position
 	orb_attack.target = get_global_mouse_position()
 	orb_attack.level = orb_level
 	orb_attack_timer.wait_time = orb_attack_speed
 	add_child(orb_attack)
 	orb_attack_timer.start()
 	orb_float_timer.start()
-
-func _on_orb_float_timer_timeout():
-	orb_tick_timer.start()
-
-func _on_orb_tick_timer_timeout() -> void:
-	Events.orb_tick.emit()
-
 
 #GUN
 var gun_attackspeed = 0.2

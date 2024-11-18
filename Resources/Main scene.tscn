@@ -125,6 +125,10 @@ sources/3 = SubResource("TileSetAtlasSource_28ru1")
 
 [node name="World" type="Node2D"]
 
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="GUI" instance=ExtResource("4_x2cph")]
+
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 16
 visibility_layer = 16
@@ -136,14 +140,13 @@ layer_0/tile_data = PackedInt32Array(0, 3, 1, 65537, 3, 1, 65538, 3, 1, 131075, 
 
 [node name="player" parent="." instance=ExtResource("3_k660c")]
 
-[node name="GUI" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="GUI" instance=ExtResource("4_x2cph")]
-
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
 [node name="spawner" parent="." instance=ExtResource("5_km2rm")]
 
+[node name="WeaponHandler" type="Node2D" parent="."]
+position = Vector2(574, 323)
+
+[editable path="GUI/HUD"]
 [editable path="player"]
 [editable path="player/Hurtbox"]
-[editable path="GUI/HUD"]
