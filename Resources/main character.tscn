@@ -71,7 +71,6 @@ radius = 15.0
 top_level = true
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(574, 323)
 collision_layer = 2
 script = ExtResource("1_goanb")
 

@@ -21,6 +21,10 @@ Events="*res://GlobalResources/events.gd"
 XpHandler="*res://GlobalResources/xp_handler.gd"
 Stats="*res://GlobalResources/stats.gd"
 
+[global_group]
+
+attack=""
+
 [input]
 
 left={

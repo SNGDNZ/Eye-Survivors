@@ -35,7 +35,7 @@ func _on_player_level_up():
 		var option_choice = upgrade_options.instantiate()
 		upgrade_options_panel.add_child(option_choice)
 		options += 1
-	get_tree().paused = true
+	#get_tree().paused = true
 
 func upgrade_character(upgrade):
 	var option_children = upgrade_options_panel.get_children()
@@ -43,5 +43,5 @@ func upgrade_character(upgrade):
 		i.queue_free()
 	level_up_panel.visible = false
 	level_up_panel.position = Vector2(376,1000)
-	get_tree().paused = false
+	#get_tree().paused = false
 	#Events.calculate_xp.emit(0)

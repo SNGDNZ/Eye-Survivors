@@ -5,18 +5,18 @@ var orb = preload("res://Resources/orb.tscn")
 
 func _process(delta):
 	if Input.is_action_just_pressed("click"):
-		print ("click")
+		print(get_global_mouse_position())
 		orb_attack()
+		orb
 
 func orb_attack():
-	print ("orb_attack")
 	if player.isdead:
 		return
 	#if orb_attack_timer.is_stopped = false:
 		#return
 	var orb_attack = orb.instantiate()
-	orb_attack.target = get_global_mouse_position()
+	orb_attack.position = player.global_position
+	orb_attack.mousetarget = get_global_mouse_position() #VECTOR
+	orb_attack.pos1 = orb_attack.position + Vector2.from_angle(orb_attack.angle)*800
+	orb_attack.pos2 = orb_attack.position + Vector2.from_angle(orb_attack.angle)*300
 	add_child(orb_attack)
-	print (orb_attack.target)
-	if orb_attack.position.distance_to(orb_attack.target) <10:
-		print("orb target reached")
