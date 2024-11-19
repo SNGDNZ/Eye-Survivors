@@ -76,6 +76,7 @@ script = ExtResource("1_goanb")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(2, 2)
+zoom = Vector2(0.3, 0.3)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

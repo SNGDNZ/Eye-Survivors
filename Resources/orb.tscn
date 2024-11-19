@@ -23,4 +23,9 @@ shape = SubResource("CircleShape2D_c3h4q")
 wait_time = 8.0
 autostart = true
 
+[node name="OrbFloatTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="OrbTimeoutTimer" to="." method="_on_orb_timeout_timer_timeout"]
+[connection signal="timeout" from="OrbFloatTimer" to="." method="_on_orb_float_timer_timeout"]
