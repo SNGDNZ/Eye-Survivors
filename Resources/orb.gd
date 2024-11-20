@@ -8,6 +8,7 @@ extends Area2D
 @onready var orb_impact_snd = $OrbImpactSnd
 @onready var orb_float_timer = $OrbFloatTimer
 @onready var orb_impact_timer = $OrbImpactTimer
+
 var damage = 4
 var hp = 1
 var knockback_amount = 600
@@ -44,6 +45,3 @@ func _on_orb_impact_snd_finished() -> void:
 	#hp -= charge
 	#if hp <= 0:
 		#queue_free()
-
-func _on_orb_timeout_timer_timeout() -> void:
-	queue_free()

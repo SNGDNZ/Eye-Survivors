@@ -33,10 +33,6 @@ volume_db = -14.222
 stream = ExtResource("5_2eoao")
 volume_db = -12.404
 
-[node name="OrbTimeoutTimer" type="Timer" parent="."]
-wait_time = 8.0
-autostart = true
-
 [node name="OrbFloatTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
@@ -46,6 +42,5 @@ wait_time = 0.4
 one_shot = true
 
 [connection signal="finished" from="OrbImpactSnd" to="." method="_on_orb_impact_snd_finished"]
-[connection signal="timeout" from="OrbTimeoutTimer" to="." method="_on_orb_timeout_timer_timeout"]
 [connection signal="timeout" from="OrbFloatTimer" to="." method="_on_orb_float_timer_timeout"]
 [connection signal="timeout" from="OrbImpactTimer" to="." method="_on_orb_impact_timer_timeout"]

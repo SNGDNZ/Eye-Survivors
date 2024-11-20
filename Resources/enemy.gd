@@ -43,10 +43,10 @@ func _on_enemy_death() -> void:
 func _on_xp_spawn() -> void:
 	var new_gem = xp_gem.instantiate()
 	new_gem.global_position = global_position
-
-#MOVEMENT
 	new_gem.xp_worth = experience
 	loot_base.call_deferred("add_child", new_gem)
+
+#MOVEMENT
 func _physics_process(delta: float):
 	knockback_enemy = knockback_enemy.move_toward(Vector2.ZERO, knockback_recovery)
 	if self.global_position.distance_to(player.global_position) < 43:

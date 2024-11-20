@@ -1,10 +1,11 @@
 extends Node2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
+
 #ORB
 var orb = preload("res://Resources/orb.tscn")
 var orb_pos2_reached = false
-var orb_attack = orb.instantiate()
+
 func _process(delta):
 	if Input.is_action_just_pressed("click"):
 		print("clickpos",get_global_mouse_position())
@@ -13,15 +14,16 @@ func _process(delta):
 func orb_attack_func():
 	if player.isdead:
 		return
-	orb_attack = orb.instantiate()
+	var orb_attack = orb.instantiate()
 	orb_attack.global_position.x = player.position.x - 576
 	orb_attack.global_position.y = player.position.y - 324
 	
 	orb_attack.mousetarget = get_global_mouse_position() #VECTOR
-	orb_attack.direction = player.global_position.angle_to(orb_attack.mousetarget)
+	orb_attack.direction = orb_attack.global_position.angle_to(orb_attack.mousetarget)
 	orb_attack.angle = enemy.global_position.direction_to(orb_attack.mousetarget)
 	
-	orb_attack.targetpos1 = player.global_position + Vector2.from_angle(randf_range(0, 2*PI))*100
+	var orb_attack_cone = Vector2.from_angle(randf_range(-0.25*PI+ orb_attack.direction, 0.25*PI+ orb_attack.direction))*100
+	orb_attack.targetpos1 = player.global_position + orb_attack_cone
 	orb_attack.targetpos2 = orb_attack.mousetarget
 	add_child(orb_attack)
 	#TWEEN
@@ -36,5 +38,3 @@ func orb_attack_func():
 	#print("playerglobalpos",player.global_position)
 	#print("playerpos",player.position)
 	#print("pos2",orb_attack.targetpos2)
-	
-	
