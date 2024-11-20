@@ -136,4 +136,4 @@ func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
 		var gem_xp = area.collect()
 		Events.calculate_xp.emit(gem_xp)
-		print ("player_xp_emit")
+		#print("player_xp_emit")

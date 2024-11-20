@@ -11,7 +11,7 @@ extends CharacterBody2D
 @export var knockback_recovery = 3.5
 @export var experience = 0
 
-var knockback = Vector2.ZERO
+var knockback_enemy = Vector2.ZERO
 var xp_gem = preload("res://Resources/exp_crystal.tscn")
 
 signal enemy_death()
@@ -20,9 +20,9 @@ signal enemy_hurt()
 signal remove_from_array(object)
 
 #HEALTH
-func _on_hurtbox_hurt(damage, angle, knockback_amount):
+func _on_hurtbox_hurt(damage, angle, knockback):
 	hp -= damage
-	knockback = angle * knockback_amount
+	knockback_enemy = angle * knockback
 	emit_signal("enemy_hurt")
 
 func _on_enemy_hurt():
@@ -48,12 +48,12 @@ func _on_xp_spawn() -> void:
 	new_gem.xp_worth = experience
 	loot_base.call_deferred("add_child", new_gem)
 func _physics_process(delta: float):
-	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
+	knockback_enemy = knockback_enemy.move_toward(Vector2.ZERO, knockback_recovery)
 	if self.global_position.distance_to(player.global_position) < 43:
 		return
 	var dir = global_position.direction_to(player.global_position)
 	velocity = dir*speed
-	velocity += knockback
+	velocity += knockback_enemy
 	if(player.global_position.x - self.global_position.x) < 0:
 		sprite.flip_h = false 
 	else:

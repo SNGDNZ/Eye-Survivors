@@ -4,7 +4,7 @@ extends Node
 
 #ENEMY
 signal enemy_death()
-signal hurt(damage, angle, knockback)
+signal hurt(damage, angle, knockback_amount)
 
 #PLAYER
 signal player_death()
