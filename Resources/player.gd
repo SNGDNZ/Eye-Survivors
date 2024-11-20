@@ -24,7 +24,9 @@ var xp_collected = 0
 signal player_hurt()
 signal player_death()
 
+
 func _ready():
+	Events.player_death.connect(_on_player_death)
 	gun_attack()
 	health_bar.value = hp
 	death_text.visible = false
@@ -51,7 +53,8 @@ func _on_player_death():
 		death_text.visible = true
 		death_text_timer.start()
 		death_sound.play()
-		hurtbox.queue_free()
+		hurtbox.set_collision_layer_value(2, false)
+		hurtbox.set_collision_mask_value(2, false)
 		sprite.play("idle")
 		velocity = Vector2.ZERO
 
@@ -102,7 +105,6 @@ func gun_attack():
 	var gun_attack = gun.instantiate()
 	gun_attack.position = position
 	gun_attack.target = get_random_target()
-	gun_attack.level = gun_level
 	add_child(gun_attack)
 	gun_attack_timer.start()
 

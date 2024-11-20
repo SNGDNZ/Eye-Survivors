@@ -41,6 +41,8 @@ one_shot = true
 wait_time = 0.4
 one_shot = true
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
 [connection signal="finished" from="OrbImpactSnd" to="." method="_on_orb_impact_snd_finished"]
 [connection signal="timeout" from="OrbFloatTimer" to="." method="_on_orb_float_timer_timeout"]
 [connection signal="timeout" from="OrbImpactTimer" to="." method="_on_orb_impact_timer_timeout"]

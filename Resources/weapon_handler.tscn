@@ -5,3 +5,7 @@
 [node name="WeaponHandler" type="Node2D" groups=["orb"]]
 position = Vector2(574, 323)
 script = ExtResource("1_1xvl0")
+
+[node name="OrbAttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true

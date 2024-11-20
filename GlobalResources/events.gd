@@ -17,6 +17,6 @@ signal selected_upgrade()
 
 func _input(event):
 	if event.is_action_pressed("t"):
-		emit_signal("player_death")
+		Events.player_death.emit()
 	if event.is_action_pressed("r"):
 		get_tree().reload_current_scene()
