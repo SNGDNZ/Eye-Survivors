@@ -91,12 +91,7 @@ var orb_angle = Vector2.ZERO
 #ENEMY RELATED
 var enemy_close = []
 
-#ORB
-
 #GUN
-var gun_attackspeed = 0.2
-var gun_level = 1
-
 func gun_attack():
 	if isdead:
 		return
@@ -107,12 +102,11 @@ func gun_attack():
 	gun_attack.target = get_random_target()
 	add_child(gun_attack)
 	gun_attack_timer.start()
+	gun_attack_timer.wait_time = gun_attack.attack_speed
 
 func _on_gun_attack_timer_timeout() -> void:
-	if gun_level > 0:
-		gun_attack_timer.wait_time = gun_attackspeed
-		gun_attack()
-		gun_attack_timer.start()
+	gun_attack()
+	gun_attack_timer.start()
 
 func get_random_target():
 	if enemy_close.size() > 0:
