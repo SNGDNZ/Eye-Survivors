@@ -5,13 +5,3 @@
 [node name="WeaponHandler" type="Node2D" groups=["orb"]]
 position = Vector2(574, 323)
 script = ExtResource("1_1xvl0")
-
-[node name="OrbFloatTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="OrbImpactTimer" type="Timer" parent="."]
-wait_time = 0.3
-one_shot = true
-
-[connection signal="timeout" from="OrbFloatTimer" to="." method="_on_orb_float_timer_timeout"]
