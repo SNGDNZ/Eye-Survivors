@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="eye survivors"
-run/main_scene="res://Resources/Main scene.tscn"
+run/main_scene="res://scenes/level_1.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Events="*res://GlobalResources/events.gd"
-XpHandler="*res://GlobalResources/xp_handler.gd"
-Stats="*res://GlobalResources/stats.gd"
+Stats="*res://globalscripts/stats.gd"
+Events="*res://globalscripts/events.gd"
+XpHandler="*res://globalscripts/xp_handler.gd"
 
 [global_group]
 
