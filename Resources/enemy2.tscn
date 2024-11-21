@@ -1,21 +1,23 @@
-[gd_scene load_steps=21 format=3 uid="uid://2g8u3su8jh3l"]
+[gd_scene load_steps=23 format=3 uid="uid://2g8u3su8jh3l"]
 
 [ext_resource type="Script" path="res://Resources/enemy.gd" id="1_7o8jv"]
-[ext_resource type="Texture2D" uid="uid://dbe8y6lq3wycj" path="res://Sprites/whale/dead/1.png" id="2_snmup"]
-[ext_resource type="Texture2D" uid="uid://biaopc63s2chm" path="res://Sprites/whale/dead/2.png" id="3_xtgtu"]
+[ext_resource type="Texture2D" uid="uid://c473ayjdldkib" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_special_death/E/skeleton_special_death_E_0.0_0.png" id="2_6rfct"]
+[ext_resource type="Texture2D" uid="uid://bpjxjcs0ktoys" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_special_death/E/skeleton_special_death_E_0.0_1.png" id="3_lruq7"]
+[ext_resource type="Texture2D" uid="uid://4e1soyswifrd" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_0.png" id="4_c55p8"]
+[ext_resource type="Texture2D" uid="uid://bpj4pqd81mj5i" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_special_death/E/skeleton_special_death_E_0.0_2.png" id="4_d0gxy"]
+[ext_resource type="Texture2D" uid="uid://ba6lbxyk6gcn4" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_special_death/E/skeleton_special_death_E_0.0_3.png" id="5_ddq7m"]
+[ext_resource type="Texture2D" uid="uid://yyxyvwyt3r4k" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_1.png" id="5_w2tuj"]
+[ext_resource type="Texture2D" uid="uid://di6qgeit6cjex" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_2.png" id="6_devn5"]
+[ext_resource type="Texture2D" uid="uid://yr3mt4plh1em" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_special_death/E/skeleton_special_death_E_0.0_4.png" id="6_rqe71"]
+[ext_resource type="Texture2D" uid="uid://dwrlm8e5700g4" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_special_death/E/skeleton_special_death_E_0.0_5.png" id="7_bmei1"]
+[ext_resource type="Texture2D" uid="uid://ch1gxvxd5grc7" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_3.png" id="7_klurw"]
+[ext_resource type="Texture2D" uid="uid://ch1x86bbb5rwg" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_4.png" id="8_7k4kj"]
+[ext_resource type="Texture2D" uid="uid://c2diaa05ht8ir" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_5.png" id="9_iud4d"]
+[ext_resource type="Texture2D" uid="uid://bvinb031iae41" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_6.png" id="10_xp174"]
+[ext_resource type="Texture2D" uid="uid://1n3yxhb1hxtk" path="res://Lords Of Pain - Old School Isometric Assets/enemy/skeleton/skeleton_default_walk/E/skeleton_default_walk_E_0.0_7.png" id="11_y8gsn"]
 [ext_resource type="PackedScene" uid="uid://dsxtql4g4yorq" path="res://Resources/hurtbox.tscn" id="16_cf0xx"]
-[ext_resource type="Texture2D" uid="uid://csf0dd2qvoy6l" path="res://Sprites/whale/run/1.png" id="16_xdoys"]
-[ext_resource type="Texture2D" uid="uid://d1mmmoug2dkj5" path="res://Sprites/whale/run/2.png" id="17_2escf"]
 [ext_resource type="PackedScene" uid="uid://drpei0uj8d8x4" path="res://Resources/hitbox.tscn" id="17_gfbpf"]
-[ext_resource type="Texture2D" uid="uid://t7c30jw02th8" path="res://Sprites/whale/run/3.png" id="18_0uxup"]
 [ext_resource type="AudioStream" uid="uid://crcoluyyhhy3" path="res://Sounds/enemy_hurt.mp3" id="18_nl4mg"]
-[ext_resource type="Texture2D" uid="uid://cwyly4d076yfj" path="res://Sprites/whale/run/4.png" id="19_ambvw"]
-[ext_resource type="Texture2D" uid="uid://cq0b8bi15d24d" path="res://Sprites/whale/run/5.png" id="20_ijhur"]
-[ext_resource type="Texture2D" uid="uid://cp51ppcbkt4lk" path="res://Sprites/whale/run/6.png" id="21_xi32v"]
-[ext_resource type="Texture2D" uid="uid://cxc6j8o5ws85r" path="res://Sprites/whale/run/7.png" id="22_l400r"]
-[ext_resource type="Texture2D" uid="uid://dhbvo3stw4212" path="res://Sprites/whale/run/8.png" id="23_64ti0"]
-[ext_resource type="Texture2D" uid="uid://cbcxvstvs3g7v" path="res://Sprites/whale/run/9.png" id="24_ivesm"]
-[ext_resource type="Texture2D" uid="uid://bljnkgcd43ts3" path="res://Sprites/whale/run/10.png" id="25_r81bj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wj1l7"]
 radius = 24.0
@@ -24,56 +26,63 @@ radius = 24.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_snmup")
+"texture": ExtResource("2_6rfct")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_xtgtu")
+"texture": ExtResource("3_lruq7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d0gxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ddq7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rqe71")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bmei1")
 }],
 "loop": true,
 "name": &"hurt",
-"speed": 30.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("16_xdoys")
+"texture": ExtResource("4_c55p8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_2escf")
+"texture": ExtResource("5_w2tuj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_0uxup")
+"texture": ExtResource("6_devn5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_ambvw")
+"texture": ExtResource("7_klurw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("20_ijhur")
+"texture": ExtResource("8_7k4kj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("21_xi32v")
+"texture": ExtResource("9_iud4d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("22_l400r")
+"texture": ExtResource("10_xp174")
 }, {
 "duration": 1.0,
-"texture": ExtResource("23_64ti0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_ivesm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_r81bj")
+"texture": ExtResource("11_y8gsn")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 30.0
+"speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bwm5k"]
-radius = 32.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6y48a"]
+radius = 15.0
+height = 58.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q8hds"]
-radius = 26.0
+radius = 15.0333
 
 [node name="Enemy2" type="CharacterBody2D"]
 light_mask = 2
@@ -89,10 +98,13 @@ experience = 1
 shape = SubResource("CircleShape2D_wj1l7")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -3)
+texture_filter = 1
+position = Vector2(-9, 4)
+scale = Vector2(2.73438, 2.73438)
 sprite_frames = SubResource("SpriteFrames_wstes")
-animation = &"hurt"
+animation = &"walk"
 autoplay = "walk"
+frame_progress = 0.918126
 
 [node name="Hurtbox" parent="." instance=ExtResource("16_cf0xx")]
 collision_layer = 4
@@ -100,7 +112,8 @@ collision_mask = 4
 HurtboxType = 1
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_bwm5k")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6y48a")
 
 [node name="DisableTimer" parent="Hurtbox" index="1"]
 one_shot = false

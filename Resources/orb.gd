@@ -9,13 +9,13 @@ extends Area2D
 @onready var orb_impact_snd = $OrbImpactSnd
 @onready var orb_float_timer = $OrbFloatTimer
 @onready var orb_impact_timer = $OrbImpactTimer
-@onready var cast_direction = $RayCast2D
+
 
 var hp = 1 
 var damage = 5
-var knockback_amount = 600 
+var knockback_amount = 500 
 var area_size = 200 
-var attack_speed = 1.5
+var attack_speed = 1.5 * Stats.attack_speed_mult
 
 var mousetarget := Vector2.ZERO
 var targetpos1 := Vector2.ZERO

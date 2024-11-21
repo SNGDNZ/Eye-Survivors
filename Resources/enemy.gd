@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var enemy_hurt_sound = $EnemyHurt
 @onready var hurt_timer = $EnemyHurtTimer
 
-@export var speed = 200
+@export var speed = 110
 @export var hp = 20
 @export var knockback_recovery = 3.5
 @export var experience = 0
@@ -55,9 +55,9 @@ func _physics_process(delta: float):
 	velocity = dir*speed
 	velocity += knockback_enemy
 	if(player.global_position.x - self.global_position.x) < 0:
-		sprite.flip_h = false 
-	else:
 		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 	move_and_slide()
 
 

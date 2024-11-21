@@ -41,7 +41,7 @@ func orb_attack_func():
 		orb_tween.chain().tween_property(orb_attack, "global_position", orb_attack.mousetarget,0.3).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
 		orb_tween.play
 		
-		orb_attack_timer.wait_time = orb_attack.attack_speed
+		#orb_attack_timer.wait_time = orb_attack.attack_speed
 		orb_attack_timer.start()
 		#DEBUG
 		#print("mousetarget",orb_attack.mousetarget)
