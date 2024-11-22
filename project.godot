@@ -21,6 +21,11 @@ Stats="*res://globalscripts/stats.gd"
 Events="*res://globalscripts/events.gd"
 XpHandler="*res://globalscripts/xp_handler.gd"
 
+[display]
+
+window/size/mode=3
+window/stretch/mode="viewport"
+
 [global_group]
 
 attack=""

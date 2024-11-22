@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var hurtbox = $Hurtbox
 @onready var health_bar = get_tree().get_first_node_in_group("player_health_bar")
+@onready var health_bar_number = get_tree().get_first_node_in_group("player_health_bar_number")
 @onready var hurt_sound = $PlayerHurt
 @onready var death_sound = $PlayerDeath
 @onready var death_text = get_tree().get_first_node_in_group("you_died_text")
@@ -29,6 +30,7 @@ func _ready():
 	Events.player_death.connect(_on_player_death)
 	flame_attack()
 	health_bar.value = hp
+	health_bar_number.text = str(health_bar.value / health_bar.max_value)
 	death_text.visible = false
 	isdead = false
 
@@ -42,6 +44,7 @@ func _on_hurtbox_hurt(damage, _angle, _knockback_amount):
 
 func _on_player_hurt() -> void:
 	health_bar.value = hp
+	health_bar_number.text = str(health_bar.value / health_bar.max_value)
 	hurt_sound.pitch_scale = randf_range(0.9, 1.1)
 	hurt_sound.play()
 
@@ -50,6 +53,7 @@ func _on_player_death():
 		print("isdead")
 		hp = 0
 		health_bar.value = hp
+		health_bar_number.text = str(health_bar.value / health_bar.max_value)
 		death_text.visible = true
 		death_text_timer.start()
 		death_sound.play()
