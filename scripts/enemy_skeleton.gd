@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var enemy_hurt_sound = $EnemyHurt
 @onready var hurt_timer = $EnemyHurtTimer
 
-@export var speed = 110
+@export var speed = 70
 @export var hp = 20
 @export var knockback_recovery = 3.5
 @export var experience = 0
@@ -27,17 +27,19 @@ func _on_hurtbox_hurt(damage, angle, knockback):
 
 func _on_enemy_hurt():
 	hurt_timer.start()
-	sprite.play("hurt")
 	enemy_hurt_sound.play()
 
 func _on_enemy_hurt_timer_timeout() -> void:
-	sprite.play("walk")
 	if hp <=0:
 		emit_signal("enemy_death")
 
 func _on_enemy_death() -> void:
+	sprite.play("death")
 	emit_signal("xp_spawn")
 	emit_signal("remove_from_array",self)
+	#queue_free()
+
+func _on_sprite_animation_finished(death) -> void:
 	queue_free()
 
 func _on_xp_spawn() -> void:

@@ -13,7 +13,7 @@ extends CharacterBody2D
 @onready var level_display = get_tree().get_first_node_in_group("level_display")
 @onready var xp_bar = get_tree().get_first_node_in_group("xp_bar")
 
-@export var speed = 300
+@export var speed = 100
 @export var hp = 50
 
 var isdead = false
@@ -66,20 +66,9 @@ func _physics_process(delta):
 
 
 func movement():
-	var left_mov = Input.get_action_strength("left")
-	var right_mov = Input.get_action_strength("right")
-	var up_mov = Input.get_action_strength("up")
-	var down_mov = Input.get_action_strength("down")
-	
-	if right_mov == 1:
-		sprite.play("walk_e")
-	if left_mov == 1:
-		sprite.play("walk_w")
-	if up_mov == 1:
-		sprite.play("walk_n")
-	if down_mov == 1:
-		sprite.play("walk_s")
-	
+	var mov = Input
+	var direction = Input.get_vector("left","right","up","down")
+	velocity = direction * speed
 	move_and_slide()
 	
 
@@ -105,7 +94,10 @@ func flame_attack():
 	var flame_attack = flame.instantiate()
 	flame_attack.position = position
 	flame_attack.target = get_random_target()
+	var flame_tween = flame_attack.create_tween().set_parallel(true)
+	flame_tween.tween_property(flame_attack, "global_position", flame_attack.target,0.2).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
 	add_child(flame_attack)
+	flame_tween.play
 	flame_attack_timer.start()
 	flame_attack_timer.wait_time = flame_attack.attack_speed
 

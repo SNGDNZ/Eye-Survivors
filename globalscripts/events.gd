@@ -8,7 +8,7 @@ signal hurt(damage, angle, knockback_amount)
 
 #PLAYER
 signal player_death()
-
+signal player_hurt(damage)
 
 #XP HANDLER
 signal level_up()

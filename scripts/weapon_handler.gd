@@ -22,8 +22,7 @@ func orb_attack_func():
 		return
 	if orb_attack_timer.is_stopped():
 		var orb_attack = orb.instantiate()
-		orb_attack.global_position.x = player.position.x - 576
-		orb_attack.global_position.y = player.position.y - 324
+		orb_attack.position = player.global_position
 		
 		orb_attack.mousetarget = get_global_mouse_position() #VECTOR
 		orb_attack.direction = orb_attack.global_position.angle_to(orb_attack.mousetarget)
