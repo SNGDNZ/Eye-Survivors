@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://d3w2xo2ep305f"
-path="res://.godot/imported/orb_emit.mp3-308c4bbcab487f6561aae2aec7eb9a7a.mp3str"
+path="res://.godot/imported/orb_emit.mp3-b69f83ada5ff80fb746414457e44aa94.mp3str"
 
 [deps]
 
-source_file="res://sounds/orb_emit.mp3"
-dest_files=["res://.godot/imported/orb_emit.mp3-308c4bbcab487f6561aae2aec7eb9a7a.mp3str"]
+source_file="res://Sounds/orb_emit.mp3"
+dest_files=["res://.godot/imported/orb_emit.mp3-b69f83ada5ff80fb746414457e44aa94.mp3str"]
 
 [params]
 

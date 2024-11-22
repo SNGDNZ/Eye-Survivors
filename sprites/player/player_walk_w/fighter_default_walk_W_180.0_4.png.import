@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rvja4yyk52dy"
-path="res://.godot/imported/fighter_default_walk_W_180.0_4.png-fff0bd3fdd968fb57fe81b73e86ced8a.ctex"
+path="res://.godot/imported/fighter_default_walk_W_180.0_4.png-4ebc1bb512a605e2244d3d4c1bb9b446.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/player_walk_w/fighter_default_walk_W_180.0_4.png"
-dest_files=["res://.godot/imported/fighter_default_walk_W_180.0_4.png-fff0bd3fdd968fb57fe81b73e86ced8a.ctex"]
+source_file="res://Sprites/player/player_walk_w/fighter_default_walk_W_180.0_4.png"
+dest_files=["res://.godot/imported/fighter_default_walk_W_180.0_4.png-4ebc1bb512a605e2244d3d4c1bb9b446.ctex"]
 
 [params]
 

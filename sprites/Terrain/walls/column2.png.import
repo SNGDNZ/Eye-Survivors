@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mdsxhlu776nc"
-path="res://.godot/imported/column2.png-8093b1ac5a2486fe663da5b87b1ff31f.ctex"
+path="res://.godot/imported/column2.png-e74c48781d2f96367483062db89276aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Terrain/walls/column2.png"
-dest_files=["res://.godot/imported/column2.png-8093b1ac5a2486fe663da5b87b1ff31f.ctex"]
+source_file="res://Sprites/Terrain/walls/column2.png"
+dest_files=["res://.godot/imported/column2.png-e74c48781d2f96367483062db89276aa.ctex"]
 
 [params]
 

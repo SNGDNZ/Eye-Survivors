@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://m5lfh6qiqacw"
-path="res://.godot/imported/Cartoon Boing Sound Effect 2.mp3-14506145749fa3ff96c12d7c91b808e3.mp3str"
+path="res://.godot/imported/Cartoon Boing Sound Effect 2.mp3-e8f3cc1a1891812dc0d7dd2233df8c9b.mp3str"
 
 [deps]
 
-source_file="res://sounds/Cartoon Boing Sound Effect 2.mp3"
-dest_files=["res://.godot/imported/Cartoon Boing Sound Effect 2.mp3-14506145749fa3ff96c12d7c91b808e3.mp3str"]
+source_file="res://Sounds/Cartoon Boing Sound Effect 2.mp3"
+dest_files=["res://.godot/imported/Cartoon Boing Sound Effect 2.mp3-e8f3cc1a1891812dc0d7dd2233df8c9b.mp3str"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://diw2ekosw6wff"
-path="res://.godot/imported/orb_impact_radius_sprite.png-eb845af08069391a0fa6c35b6ba7e135.ctex"
+path="res://.godot/imported/orb_impact_radius_sprite.png-a3293ef4dfd702b8b6a117114d8b4146.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/orb/orb_impact_radius_sprite.png"
-dest_files=["res://.godot/imported/orb_impact_radius_sprite.png-eb845af08069391a0fa6c35b6ba7e135.ctex"]
+source_file="res://Sprites/orb/orb_impact_radius_sprite.png"
+dest_files=["res://.godot/imported/orb_impact_radius_sprite.png-a3293ef4dfd702b8b6a117114d8b4146.ctex"]
 
 [params]
 

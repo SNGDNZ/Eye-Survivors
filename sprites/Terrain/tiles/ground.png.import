@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://df6tsc7kfdow4"
-path="res://.godot/imported/ground.png-f878a0750b06bae351fb88bdd033b25c.ctex"
+path="res://.godot/imported/ground.png-ced33f68660b5e7245ac794dbe055050.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Terrain/tiles/ground.png"
-dest_files=["res://.godot/imported/ground.png-f878a0750b06bae351fb88bdd033b25c.ctex"]
+source_file="res://Sprites/Terrain/tiles/ground.png"
+dest_files=["res://.godot/imported/ground.png-ced33f68660b5e7245ac794dbe055050.ctex"]
 
 [params]
 
