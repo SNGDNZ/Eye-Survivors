@@ -5,7 +5,7 @@ extends Area2D
 var hp := 1
 var speed := 1200
 var damage := 10
-var knockback_amount := 200
+var knockback_amount := 60
 var area_size := 1
 var attack_speed := 0.3
 

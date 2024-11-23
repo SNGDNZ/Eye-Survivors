@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://m5lfh6qiqacw" path="res://sounds/Cartoon Boing Sound Effect 2.mp3" id="3_6l51j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g0pt4"]
-radius = 17.0294
+radius = 12.0416
 
 [node name="xp_crystal" type="Area2D" groups=["loot"]]
 collision_layer = 8
@@ -14,6 +14,8 @@ script = ExtResource("1_me2ig")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(4, 1)
+scale = Vector2(2, 2)
 texture = ExtResource("2_xdtcg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

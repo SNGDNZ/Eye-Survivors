@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var hitbox_area = $OrbImpactRadius
+@onready var hitbox_area = $OrbImpactRadius 
 @onready var sprite = $OrbSprite
 @onready var orb_impact_radius_sprite = $OrbImpactRadiusSprite
 @onready var orb_emit_snd = $OrbEmitSnd
@@ -13,7 +13,7 @@ extends Area2D
 
 var hp = 1 
 var damage = 5
-var knockback_amount = 500 
+var knockback_amount = 200 
 var area_size = 200 
 var attack_speed = 1.5 * Stats.attack_speed_mult
 
@@ -25,8 +25,6 @@ var direction : float
 
 func _ready():
 	orb_impact_radius_sprite.visible = false
-	#hitbox_area.size = area_size
-	#orb_impact_radius_sprite.scale = area_size / 200
 	set_collision_mask_value(3, false)
 	set_collision_layer_value(3, false)
 	sprite.scale = Vector2(0,0)

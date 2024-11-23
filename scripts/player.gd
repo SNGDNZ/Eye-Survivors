@@ -5,9 +5,9 @@ extends CharacterBody2D
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var hurtbox = $Hurtbox
-@onready var health_bar = get_tree().get_first_node_in_group("player_health_bar")
-@onready var hurt_sound = $PlayerHurt
-@onready var death_sound = $PlayerDeath
+
+@onready var hurt_sound = $PlayerHurtSnd
+@onready var death_sound = $PlayerDeathSnd
 @onready var death_text = get_tree().get_first_node_in_group("you_died_text")
 @onready var death_text_timer = get_tree().get_first_node_in_group("death_text_timer")
 @onready var level_display = get_tree().get_first_node_in_group("level_display")
@@ -24,24 +24,23 @@ var xp_collected = 0
 signal player_hurt()
 signal player_death()
 
-
 func _ready():
+	Events.player_hurt.connect(_on_player_hurt)
 	Events.player_death.connect(_on_player_death)
 	flame_attack()
-	health_bar.value = hp
-	death_text.visible = false
 	isdead = false
 
 #HEALTH
-func _on_hurtbox_hurt(damage, _angle, _knockback_amount):
+func _on_hurtbox_hurt(damage, _angle, _knockback):
 	hp -= damage
 	if hp > 0:
 		emit_signal("player_hurt")
+		Events.player_hurt.emit(damage)
 	else:
 		emit_signal("player_death")
+		Events.player_death.emit()
 
-func _on_player_hurt() -> void:
-	health_bar.value = hp
+func _on_player_hurt(damage) -> void:
 	hurt_sound.pitch_scale = randf_range(0.9, 1.1)
 	hurt_sound.play()
 
@@ -49,9 +48,6 @@ func _on_player_death():
 		isdead = true
 		print("isdead")
 		hp = 0
-		health_bar.value = hp
-		death_text.visible = true
-		death_text_timer.start()
 		death_sound.play()
 		hurtbox.set_collision_layer_value(2, false)
 		hurtbox.set_collision_mask_value(2, false)
@@ -66,21 +62,39 @@ func _physics_process(delta):
 
 
 func movement():
-	var mov = Input
 	var direction = Input.get_vector("left","right","up","down")
 	velocity = direction * speed
+	if Input.is_action_pressed("left"): #and not Input.is_action_pressed("right"):
+		sprite.play("walk_w")
+	if Input.is_action_pressed("right"): #and not Input.is_action_pressed("left"):
+		sprite.play("walk_e")
+	if Input.is_action_pressed("up"): #and not Input.is_action_pressed("down"):
+		sprite.play("walk_n")
+	if Input.is_action_pressed("down"): #and not Input.is_action_pressed("up"):
+		sprite.play("walk_s")
+		#####
+	if Input.is_action_pressed("up") and Input.is_action_pressed("right"):
+		sprite.play("walk_ne")
+	if Input.is_action_pressed("up") and Input.is_action_pressed("left"):
+		sprite.play("walk_nw")
+	if Input.is_action_pressed("down") and Input.is_action_pressed("right"):
+		sprite.play("walk_se")
+	if Input.is_action_pressed("down") and Input.is_action_pressed("left"):
+		sprite.play("walk_sw")
+		##
+	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
+		sprite.play("walk_ne")
+	if Input.is_action_pressed("up") and Input.is_action_pressed("down"):
+		sprite.play("walk_ne")
+	if velocity == Vector2.ZERO:
+		sprite.play("idle")
 	move_and_slide()
-	
 
 #ATTACKS
 var flame = preload("res://scenes/project_flame.tscn")
 
-
 @onready var flame_attack_timer = get_tree().get_first_node_in_group("gun_attack_timer")
 @onready var flame_enemy_detection_area = $EnemyDetectionArea
-@onready var flame_fire_sound = $Gun/GunFire
-
-var orb_angle = Vector2.ZERO
 
 #ENEMY RELATED
 var enemy_close = []
@@ -94,10 +108,7 @@ func flame_attack():
 	var flame_attack = flame.instantiate()
 	flame_attack.position = position
 	flame_attack.target = get_random_target()
-	var flame_tween = flame_attack.create_tween().set_parallel(true)
-	flame_tween.tween_property(flame_attack, "global_position", flame_attack.target,0.2).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
 	add_child(flame_attack)
-	flame_tween.play
 	flame_attack_timer.start()
 	flame_attack_timer.wait_time = flame_attack.attack_speed
 
@@ -117,8 +128,6 @@ func _on_enemy_detection_area_body_entered(body):
 func _on_enemy_detection_area_body_exited(body):
 	if enemy_close.has(body):
 		enemy_close.erase(body)
-
-
 
 #XP RELATED
 func _on_grab_area_area_entered(area: Area2D) -> void:
