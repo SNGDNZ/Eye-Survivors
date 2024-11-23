@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://c06jc5mjidcdl"]
 
-[ext_resource type="Texture2D" uid="uid://cy64ug1c5wsbp" path="res://sprites/Terrain/tiles/tiles.png" id="1_fdmqa"]
-[ext_resource type="Texture2D" uid="uid://df6tsc7kfdow4" path="res://sprites/Terrain/tiles/ground.png" id="2_uj7pg"]
+[ext_resource type="Texture2D" uid="uid://cy64ug1c5wsbp" path="res://sprites/terrain/tiles/tiles.png" id="1_fdmqa"]
+[ext_resource type="Texture2D" uid="uid://df6tsc7kfdow4" path="res://sprites/terrain/tiles/ground.png" id="2_uj7pg"]
 [ext_resource type="PackedScene" uid="uid://n2ic0gsguuw5" path="res://scenes/player.tscn" id="3_k660c"]
 [ext_resource type="PackedScene" uid="uid://co5llfp8c8u5o" path="res://scenes/hud.tscn" id="4_x2cph"]
 [ext_resource type="PackedScene" uid="uid://bgyonbnnlb414" path="res://scenes/weapon_handler.tscn" id="5_kg5lo"]

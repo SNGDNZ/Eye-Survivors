@@ -3,10 +3,11 @@ extends CharacterBody2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $Sprite
-@onready var enemy_hurt_sound = $EnemyHurt
+@onready var hurt_sound1 = $EnemyHurtSnd1
+@onready var hurt_sound2 = $EnemyHurtSnd2
 @onready var hurt_timer = $EnemyHurtTimer
 
-@export var speed = 110
+@export var speed = 70
 @export var hp = 20
 @export var knockback_recovery = 3.5
 @export var experience = 0
@@ -23,12 +24,17 @@ signal remove_from_array(object)
 func _on_hurtbox_hurt(damage, angle, knockback):
 	hp -= damage
 	knockback_enemy = angle * knockback
+	print("enemy hurt")
 	emit_signal("enemy_hurt")
 
 func _on_enemy_hurt():
 	hurt_timer.start()
-	sprite.play("hurt")
-	enemy_hurt_sound.play()
+	if randf_range(0,1) > 0.5:
+		hurt_sound1.set_pitch_scale(randf_range(0.5, 0.7))
+		hurt_sound1.play()
+	else:
+		hurt_sound2.set_pitch_scale(randf_range(0.5, 0.7))
+		hurt_sound2.play()
 
 func _on_enemy_hurt_timer_timeout() -> void:
 	sprite.play("walk")
@@ -54,7 +60,7 @@ func _physics_process(delta: float):
 	var dir = global_position.direction_to(player.global_position)
 	velocity = dir*speed
 	velocity += knockback_enemy
-	if(player.global_position.x - self.global_position.x) < 0:
+	if(player.global_position.x - self.global_position.x) < 20:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false

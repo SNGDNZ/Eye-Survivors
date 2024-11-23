@@ -5,16 +5,15 @@ extends CharacterBody2D
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var hurtbox = $Hurtbox
-@onready var health_bar = get_tree().get_first_node_in_group("player_health_bar")
-@onready var health_bar_number = get_tree().get_first_node_in_group("player_health_bar_number")
-@onready var hurt_sound = $PlayerHurt
-@onready var death_sound = $PlayerDeath
+
+@onready var hurt_sound = $PlayerHurtSnd
+@onready var death_sound = $PlayerDeathSnd
 @onready var death_text = get_tree().get_first_node_in_group("you_died_text")
 @onready var death_text_timer = get_tree().get_first_node_in_group("death_text_timer")
 @onready var level_display = get_tree().get_first_node_in_group("level_display")
 @onready var xp_bar = get_tree().get_first_node_in_group("xp_bar")
 
-@export var speed = 300
+@export var speed = 100
 @export var hp = 50
 
 var isdead = false
@@ -25,26 +24,23 @@ var xp_collected = 0
 signal player_hurt()
 signal player_death()
 
-
 func _ready():
+	Events.player_hurt.connect(_on_player_hurt)
 	Events.player_death.connect(_on_player_death)
 	flame_attack()
-	health_bar.value = hp
-	health_bar_number.text = str(health_bar.value / health_bar.max_value)
-	death_text.visible = false
 	isdead = false
 
 #HEALTH
-func _on_hurtbox_hurt(damage, _angle, _knockback_amount):
+func _on_hurtbox_hurt(damage, _angle, _knockback):
 	hp -= damage
 	if hp > 0:
 		emit_signal("player_hurt")
+		Events.player_hurt.emit(damage)
 	else:
 		emit_signal("player_death")
+		Events.player_death.emit()
 
-func _on_player_hurt() -> void:
-	health_bar.value = hp
-	health_bar_number.text = str(health_bar.value / health_bar.max_value)
+func _on_player_hurt(damage) -> void:
 	hurt_sound.pitch_scale = randf_range(0.9, 1.1)
 	hurt_sound.play()
 
@@ -52,10 +48,6 @@ func _on_player_death():
 		isdead = true
 		print("isdead")
 		hp = 0
-		health_bar.value = hp
-		health_bar_number.text = str(health_bar.value / health_bar.max_value)
-		death_text.visible = true
-		death_text_timer.start()
 		death_sound.play()
 		hurtbox.set_collision_layer_value(2, false)
 		hurtbox.set_collision_mask_value(2, false)
@@ -70,32 +62,39 @@ func _physics_process(delta):
 
 
 func movement():
-	var left_mov = Input.get_action_strength("left")
-	var right_mov = Input.get_action_strength("right")
-	var up_mov = Input.get_action_strength("up")
-	var down_mov = Input.get_action_strength("down")
-	
-	if right_mov == 1:
-		sprite.play("walk_e")
-	if left_mov == 1:
+	var direction = Input.get_vector("left","right","up","down")
+	velocity = direction * speed
+	if Input.is_action_pressed("left"): #and not Input.is_action_pressed("right"):
 		sprite.play("walk_w")
-	if up_mov == 1:
+	if Input.is_action_pressed("right"): #and not Input.is_action_pressed("left"):
+		sprite.play("walk_e")
+	if Input.is_action_pressed("up"): #and not Input.is_action_pressed("down"):
 		sprite.play("walk_n")
-	if down_mov == 1:
+	if Input.is_action_pressed("down"): #and not Input.is_action_pressed("up"):
 		sprite.play("walk_s")
-	
+		#####
+	if Input.is_action_pressed("up") and Input.is_action_pressed("right"):
+		sprite.play("walk_ne")
+	if Input.is_action_pressed("up") and Input.is_action_pressed("left"):
+		sprite.play("walk_nw")
+	if Input.is_action_pressed("down") and Input.is_action_pressed("right"):
+		sprite.play("walk_se")
+	if Input.is_action_pressed("down") and Input.is_action_pressed("left"):
+		sprite.play("walk_sw")
+		##
+	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
+		sprite.play("walk_ne")
+	if Input.is_action_pressed("up") and Input.is_action_pressed("down"):
+		sprite.play("walk_ne")
+	if velocity == Vector2.ZERO:
+		sprite.play("idle")
 	move_and_slide()
-	
 
 #ATTACKS
 var flame = preload("res://scenes/project_flame.tscn")
 
-
 @onready var flame_attack_timer = get_tree().get_first_node_in_group("gun_attack_timer")
 @onready var flame_enemy_detection_area = $EnemyDetectionArea
-@onready var flame_fire_sound = $Gun/GunFire
-
-var orb_angle = Vector2.ZERO
 
 #ENEMY RELATED
 var enemy_close = []
@@ -129,8 +128,6 @@ func _on_enemy_detection_area_body_entered(body):
 func _on_enemy_detection_area_body_exited(body):
 	if enemy_close.has(body):
 		enemy_close.erase(body)
-
-
 
 #XP RELATED
 func _on_grab_area_area_entered(area: Area2D) -> void:

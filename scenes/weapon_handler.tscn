@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/weapon_handler.gd" id="1_osyye"]
 
 [node name="WeaponHandler" type="Node2D" groups=["orb"]]
-position = Vector2(574, 323)
 script = ExtResource("1_osyye")
 
 [node name="OrbAttackTimer" type="Timer" parent="."]

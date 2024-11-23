@@ -2,8 +2,6 @@ extends Node2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 
-var attack_nearest = false
-
 #ORB
 
 @onready var orb_attack_timer = $OrbAttackTimer
@@ -13,7 +11,6 @@ var orb_pos2_reached = false
 
 func _process(delta):
 	if Input.is_action_pressed("click"):
-		if attack_nearest == false:
 			print("clickpos",get_global_mouse_position())
 			orb_attack_func()
 
@@ -22,8 +19,7 @@ func orb_attack_func():
 		return
 	if orb_attack_timer.is_stopped():
 		var orb_attack = orb.instantiate()
-		orb_attack.global_position.x = player.position.x - 576
-		orb_attack.global_position.y = player.position.y - 324
+		orb_attack.global_position = player.global_position
 		
 		orb_attack.mousetarget = get_global_mouse_position() #VECTOR
 		orb_attack.direction = orb_attack.global_position.angle_to(orb_attack.mousetarget)

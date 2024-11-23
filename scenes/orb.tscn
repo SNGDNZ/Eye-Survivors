@@ -20,7 +20,7 @@ script = ExtResource("1_fq6v1")
 texture_filter = 1
 texture = ExtResource("2_kqk1h")
 
-[node name="OrbImpactRadius2" type="CollisionShape2D" parent="."]
+[node name="OrbImpactRadius" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_q2344")
 

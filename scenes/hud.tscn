@@ -41,8 +41,8 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 13.0
-offset_top = -54.0
-offset_right = 675.0
+offset_top = -43.0
+offset_right = 497.0
 offset_bottom = -13.0
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_lt8rj")
@@ -66,6 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LabelYouDied" type="Label" parent="." groups=["you_died_text"]]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -128,6 +129,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UpgradeOption" parent="LevelUp" instance=ExtResource("2_577sd")]
+unique_name_in_owner = true
 layout_mode = 0
 
 [node name="LevelUpSound" type="AudioStreamPlayer" parent="LevelUp"]

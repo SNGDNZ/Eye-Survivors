@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bx7pu8ex0cyp3" path="res://sounds/player_hurt.mp3" id="5_vfjov"]
 [ext_resource type="AudioStream" uid="uid://dg6hrf8ltu6i8" path="res://sounds/player_death.mp3" id="6_54wa6"]
 [ext_resource type="Texture2D" uid="uid://bwdw32uaooqqv" path="res://sprites/player/player_walk_e/fighter_default_walk_E_0.0_4.png" id="6_hme2u"]
-[ext_resource type="AudioStream" uid="uid://crcoluyyhhy3" path="res://sounds/enemy_hurt.mp3" id="7_gv5am"]
+[ext_resource type="AudioStream" path="res://sounds/enemy_hurt.mp3" id="7_gv5am"]
 [ext_resource type="Texture2D" uid="uid://vy2lyiuhtokw" path="res://sprites/player/player_walk_e/fighter_default_walk_E_0.0_5.png" id="7_ox1wy"]
 [ext_resource type="Texture2D" uid="uid://dhbhiqq5h0xvp" path="res://sprites/player/player_walk_e/fighter_default_walk_E_0.0_6.png" id="8_3lmby"]
 [ext_resource type="Texture2D" uid="uid://h8675gqklpfc" path="res://sprites/player/player_walk_e/fighter_default_walk_E_0.0_7.png" id="9_qvp1q"]
@@ -72,6 +72,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gaudu"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_d6vs6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_5tdxe")
@@ -309,16 +317,16 @@ animations = [{
 radius = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mdwbr"]
-radius = 18.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3l3tw"]
-radius = 540.0
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ru1dr"]
-radius = 200.0
+radius = 140.014
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1gat3"]
 radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3l3tw"]
+radius = 314.841
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 top_level = true
@@ -333,17 +341,16 @@ scale = Vector2(2, 2)
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-5.96046e-07, 1.19209e-06)
-scale = Vector2(1.05, 1.05)
+scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_gaudu")
-animation = &"walk_sw"
-frame_progress = 0.901797
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_rmplp")
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_siioc")]
-visible = false
+scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 2
 
@@ -356,23 +363,13 @@ wait_time = 0.25
 [node name="PlayerHurtSnd" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_vfjov")
 volume_db = -24.002
-pitch_scale = 1.62
+pitch_scale = 1.46
 
 [node name="PlayerDeathSnd" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_54wa6")
 volume_db = -22.795
 
-[node name="EnemyDetectionArea" type="Area2D" parent="."]
-visible = false
-position = Vector2(-574, -323)
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" groups=["enemy"]]
-position = Vector2(574, 323)
-shape = SubResource("CircleShape2D_3l3tw")
-
 [node name="GrabArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -380,12 +377,20 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_ru1dr")
 
 [node name="CollectArea" type="Area2D" parent="."]
-visible = false
+scale = Vector2(0.5, 0.5)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("CircleShape2D_1gat3")
+
+[node name="EnemyDetectionArea" type="Area2D" parent="."]
+position = Vector2(-574, -323)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" groups=["enemy"]]
+position = Vector2(574, 323)
+shape = SubResource("CircleShape2D_3l3tw")
 
 [node name="Flame" type="Node2D" parent="."]
 
@@ -398,10 +403,11 @@ stream = ExtResource("7_gv5am")
 volume_db = -31.701
 pitch_scale = 1.55
 
-[connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
-[connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
+[connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="timeout" from="Flame/FlameAttackTimer" to="." method="_on_gun_attack_timer_timeout"]
 
 [editable path="Hurtbox"]
