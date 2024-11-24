@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://2g8u3su8jh3l"]
+[gd_scene load_steps=37 format=3 uid="uid://2g8u3su8jh3l"]
 
 [ext_resource type="Script" path="res://scripts/enemy_skeleton.gd" id="1_05h6e"]
 [ext_resource type="Texture2D" uid="uid://4811t7m2kx73" path="res://sprites/enemy_skeleton/death/skeleton_special_death_E_0.0_1.png" id="2_et4js"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://ch1x86bbb5rwg" path="res://sprites/enemy_skeleton/E/skeleton_default_walk_E_0.0_4.png" id="6_srjw7"]
 [ext_resource type="Texture2D" uid="uid://xhlnij237unc" path="res://sprites/enemy_skeleton/death/skeleton_special_death_E_0.0_6.png" id="7_t8g6s"]
 [ext_resource type="Texture2D" uid="uid://c2diaa05ht8ir" path="res://sprites/enemy_skeleton/E/skeleton_default_walk_E_0.0_5.png" id="7_tfkuf"]
-[ext_resource type="Texture2D" uid="uid://bkuwq7ny143lf" path="res://sprites/enemy_skeleton/death/skeleton_special_death_E_0.0_7.png" id="8_r4faq"]
 [ext_resource type="Texture2D" uid="uid://bvinb031iae41" path="res://sprites/enemy_skeleton/E/skeleton_default_walk_E_0.0_6.png" id="8_rwc2v"]
 [ext_resource type="Texture2D" uid="uid://1n3yxhb1hxtk" path="res://sprites/enemy_skeleton/E/skeleton_default_walk_E_0.0_7.png" id="9_xe1tl"]
 [ext_resource type="PackedScene" uid="uid://dsxtql4g4yorq" path="res://scenes/hurtbox.tscn" id="16_cf0xx"]
@@ -45,6 +44,9 @@ animations = [{
 "texture": ExtResource("2_et4js")
 }, {
 "duration": 1.0,
+"texture": ExtResource("2_et4js")
+}, {
+"duration": 1.0,
 "texture": ExtResource("3_kuind")
 }, {
 "duration": 1.0,
@@ -58,13 +60,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_t8g6s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_r4faq")
 }],
 "loop": true,
 "name": &"death",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -175,6 +174,7 @@ y_sort_enabled = true
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_05h6e")
+experience = 1
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wj1l7")
@@ -226,16 +226,18 @@ wait_time = 0.1
 one_shot = true
 
 [node name="EnemyDeathTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.3
 one_shot = true
 
 [connection signal="enemy_death" from="." to="." method="_on_enemy_death"]
 [connection signal="enemy_hurt" from="." to="." method="_on_enemy_hurt"]
 [connection signal="remove_from_array" from="." to="." method="_on_remove_from_array"]
 [connection signal="xp_spawn" from="." to="." method="_on_xp_spawn"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="damage_flash" from="Hurtbox" to="." method="_on_hurtbox_damage_flash"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="EnemyHurtTimer" to="." method="_on_enemy_hurt_timer_timeout"]
-[connection signal="timeout" from="EnemyDeathTimer" to="." method="_on_enemy_hurt_timer_timeout"]
 [connection signal="timeout" from="EnemyDeathTimer" to="." method="_on_enemy_death_timer_timeout"]
 
 [editable path="Hurtbox"]

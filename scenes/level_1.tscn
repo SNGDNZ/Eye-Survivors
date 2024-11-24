@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://c06jc5mjidcdl"]
 
-[ext_resource type="Texture2D" uid="uid://cy64ug1c5wsbp" path="res://sprites/Terrain/tiles/tiles.png" id="1_fdmqa"]
-[ext_resource type="Texture2D" uid="uid://df6tsc7kfdow4" path="res://sprites/Terrain/tiles/ground.png" id="2_uj7pg"]
+[ext_resource type="Texture2D" uid="uid://cy64ug1c5wsbp" path="res://sprites/terrain/tiles/tiles.png" id="1_fdmqa"]
+[ext_resource type="Texture2D" uid="uid://df6tsc7kfdow4" path="res://sprites/terrain/tiles/ground.png" id="2_uj7pg"]
 [ext_resource type="PackedScene" uid="uid://n2ic0gsguuw5" path="res://scenes/player.tscn" id="3_k660c"]
 [ext_resource type="PackedScene" uid="uid://co5llfp8c8u5o" path="res://scenes/hud.tscn" id="4_x2cph"]
 [ext_resource type="PackedScene" uid="uid://bgyonbnnlb414" path="res://scenes/weapon_handler.tscn" id="5_kg5lo"]
@@ -9,7 +9,10 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jycxs"]
 texture = ExtResource("1_fdmqa")
-texture_region_size = Vector2i(32, 16)
+margins = Vector2i(42, 67)
+separation = Vector2i(11, 0)
+texture_region_size = Vector2i(172, 122)
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_soa8q"]
 texture = ExtResource("2_uj7pg")
@@ -39,6 +42,8 @@ tile_set = SubResource("TileSet_82uql")
 [node name="Spawner" parent="." instance=ExtResource("5_km2rm")]
 
 [node name="WeaponHandler" parent="." instance=ExtResource("5_kg5lo")]
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
 [editable path="GUI/HUD"]
 [editable path="GUI/HUD/LevelUp/UpgradeOption"]

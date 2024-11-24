@@ -13,7 +13,6 @@ func _ready():
 
 func _on_calculate_xp(gem_xp):
 	xp_collected += gem_xp
-	#print("player_xp_recieve")
 	var xp_required = calculate_xp_cap()
 	if xp_amt + xp_collected >= xp_required: #Level up
 		xp_collected -= xp_required-xp_amt
@@ -26,6 +25,9 @@ func _on_calculate_xp(gem_xp):
 		xp_amt += xp_collected
 		xp_collected = 0
 	set_xpbar(xp_amt, xp_required)
+	print("xp_amt", xp_amt)
+	print("xp_req", xp_required)
+
 
 func calculate_xp_cap():
 	var xp_cap = xp_level

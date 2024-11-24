@@ -9,7 +9,7 @@ extends Node2D
 var orb = preload("res://scenes/orb.tscn")
 var orb_pos2_reached = false
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("click"):
 			#print("clickpos",get_global_mouse_position())
 			orb_attack_func()

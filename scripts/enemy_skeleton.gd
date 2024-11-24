@@ -1,4 +1,3 @@
-class_name XpCrystal
 extends CharacterBody2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -9,7 +8,6 @@ extends CharacterBody2D
 @onready var hurt_sound2 = $EnemyHurtSnd2
 @onready var hurt_timer = $EnemyHurtTimer
 @onready var death_timer = $EnemyDeathTimer
-
 @export var speed = 70
 @export var hp = 20
 @export var knockback_recovery = 3.5
@@ -20,20 +18,21 @@ var knockback_enemy = Vector2.ZERO
 var xp_gem = preload("res://scenes/xp_crystal.tscn")
 
 signal enemy_death()
-signal xp_spawn()
+signal xp_spawn(_on_xp_spawn)
 signal enemy_hurt()
 signal remove_from_array(object)
+
+func _onready():
+	sprite.speed_scale = speed / 30
 
 #HEALTH
 func _on_hurtbox_hurt(damage, angle, knockback):
 	hp -= damage
 	knockback_enemy = angle * knockback
-	print("enemy hurt")
 	emit_signal("enemy_hurt")
 
 func _on_enemy_hurt():
 	hurt_timer.start()
-	#animation.play("damage_flash")
 	if randf_range(0,1) > 0.5:
 		hurt_sound1.set_pitch_scale(randf_range(0.5, 0.7))
 		hurt_sound1.play()
@@ -43,27 +42,24 @@ func _on_enemy_hurt():
 
 func _on_enemy_hurt_timer_timeout() -> void:
 	sprite.play("walk_e")
-	if hp <=0:
+	if hp <=0 and not isdead:
 		emit_signal("enemy_death")
 		isdead = true
 
 func _on_enemy_death() -> void:
-	sprite.play("death")
-	emit_signal("xp_spawn")
-	emit_signal("remove_from_array",self)
 	death_timer.start()
+	sprite.play("death")
+	emit_signal("remove_from_array",self)
 
 func _on_enemy_death_timer_timeout() -> void:
-	#emit_signal("xp_spawn")
-	
-	self.queue_free()
+	emit_signal("xp_spawn")
 
 func _on_xp_spawn():
 	var new_gem = xp_gem.instantiate()
 	new_gem.global_position = global_position
 	new_gem.xp_worth = experience
 	loot_base.call_deferred("add_child",new_gem)
-	
+	queue_free()
 
 #MOVEMENT
 func _physics_process(delta: float):

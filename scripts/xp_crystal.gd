@@ -1,6 +1,5 @@
 extends Area2D
 
-
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
@@ -33,10 +32,12 @@ func _physics_process(delta):
 		speed += 20*delta
 
 func collect():
-	xp_sound.play()
+	xp_sound.play(0.5)
 	collision.call_deferred("set", "disabled", true)
 	sprite.visible = false
+	print("xp_worth", xp_worth)
 	return xp_worth
+
 
 func _on_xp_sound_finished() -> void:
 	queue_free()

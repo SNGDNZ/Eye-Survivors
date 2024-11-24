@@ -1,5 +1,6 @@
 extends Area2D
 
+@onready var enemy = get_tree().get_first_node_in_group("enemy")
 @export_enum("Cooldown", "HitOnce", "DisableHitbox") var HurtboxType = 0
 @onready var collision = $CollisionShape2D
 @onready var disable_timer = $DisableTimer
@@ -7,6 +8,7 @@ extends Area2D
 var hit_once_array = []
 
 signal hurt(damage, angle, knockback)
+signal damage_flash()
 
 func _on_area_entered(area):
 	if area.is_in_group("attack"):

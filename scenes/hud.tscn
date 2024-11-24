@@ -124,6 +124,7 @@ grow_vertical = 2
 [node name="UpgradeOption" parent="LevelUp" instance=ExtResource("2_577sd")]
 unique_name_in_owner = true
 layout_mode = 0
+color = Color(0.0272405, 0.00629027, 0.00143719, 1)
 
 [node name="LevelUpSound" type="AudioStreamPlayer" parent="LevelUp"]
 unique_name_in_owner = true

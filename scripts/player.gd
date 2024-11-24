@@ -11,7 +11,6 @@ extends CharacterBody2D
 @onready var death_text = get_tree().get_first_node_in_group("you_died_text")
 @onready var death_text_timer = get_tree().get_first_node_in_group("death_text_timer")
 @onready var level_display = get_tree().get_first_node_in_group("level_display")
-@onready var xp_bar = get_tree().get_first_node_in_group("xp_bar")
 
 @export var speed = 100
 @export var hp = 50
@@ -29,6 +28,7 @@ func _ready():
 	Events.player_death.connect(_on_player_death)
 	flame_attack()
 	isdead = false
+	sprite.speed_scale = speed / 30
 
 #HEALTH
 func _on_hurtbox_hurt(damage, _angle, _knockback):
@@ -40,7 +40,7 @@ func _on_hurtbox_hurt(damage, _angle, _knockback):
 		emit_signal("player_death")
 		Events.player_death.emit()
 
-func _on_player_hurt(damage) -> void:
+func _on_player_hurt(_damage) -> void:
 	hurt_sound.pitch_scale = randf_range(0.9, 1.1)
 	hurt_sound.play()
 
@@ -55,7 +55,7 @@ func _on_player_death():
 		velocity = Vector2.ZERO
 
 #MOVEMENT
-func _physics_process(delta):
+func _physics_process(_delta):
 	if hp <= 0:
 		return
 	movement()
