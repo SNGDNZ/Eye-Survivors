@@ -3,6 +3,7 @@ extends Area2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
+@onready var loot_base = get_tree().get_first_node_in_group("loot")
 @export var green_xp:Resource = preload("res://sprites/loot/xp/xp_gem_green.png")
 @export var blue_xp:Resource = preload("res://sprites/loot/xp/xp_gem_blue.png")
 @export var red_xp:Resource = preload("res://sprites/loot/xp/xp_gem_red.png")

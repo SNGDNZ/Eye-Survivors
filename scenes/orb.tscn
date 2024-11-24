@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://br6j4gmn3gm15"]
 
 [ext_resource type="Script" path="res://scripts/orb.gd" id="1_fq6v1"]
-[ext_resource type="Texture2D" uid="uid://bkjf5fs8qulhs" path="res://Sprites/orb/orb.png" id="2_kqk1h"]
-[ext_resource type="AudioStream" uid="uid://d3w2xo2ep305f" path="res://Sounds/orb_emit.mp3" id="3_c34gd"]
-[ext_resource type="Texture2D" uid="uid://diw2ekosw6wff" path="res://Sprites/orb/orb_impact_radius_sprite.png" id="3_w05fp"]
-[ext_resource type="AudioStream" uid="uid://5rr2ysw1topc" path="res://Sounds/orb_float.mp3" id="4_s70a8"]
-[ext_resource type="AudioStream" uid="uid://c2tpc6opigdo2" path="res://Sounds/orb_impact.mp3" id="5_2eoao"]
+[ext_resource type="Texture2D" uid="uid://bkjf5fs8qulhs" path="res://sprites/orb/orb.png" id="2_kqk1h"]
+[ext_resource type="AudioStream" uid="uid://d3w2xo2ep305f" path="res://sounds/orb_emit.mp3" id="3_c34gd"]
+[ext_resource type="Texture2D" uid="uid://diw2ekosw6wff" path="res://sprites/orb/orb_impact_radius_sprite.png" id="3_w05fp"]
+[ext_resource type="AudioStream" uid="uid://5rr2ysw1topc" path="res://sounds/orb_float.mp3" id="4_s70a8"]
+[ext_resource type="AudioStream" uid="uid://c2tpc6opigdo2" path="res://sounds/orb_impact.mp3" id="5_2eoao"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2344"]
 radius = 70.0

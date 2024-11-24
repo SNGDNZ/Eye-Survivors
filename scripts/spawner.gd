@@ -24,4 +24,4 @@ func _on_timer_timeout():
 					counter += 1
 
 func get_random_position() -> Vector2:
-	return player.global_position+Vector2.from_angle(randf_range(0, 2*PI))*(get_viewport_rect().size.length()*randf_range(0.8, 1.1))
+	return player.global_position+Vector2.from_angle(randf_range(0, 2*PI))*(get_viewport_rect().size.length()*randf_range(0.6, 0.8))

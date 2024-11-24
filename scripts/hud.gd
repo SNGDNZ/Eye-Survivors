@@ -24,7 +24,7 @@ func _ready():
 	Events.player_hurt.connect(_on_player_hurt)
 	Events.player_death.connect(_on_player_death)
 
-func _on_player_hurt(damage):
+func _on_player_hurt(_damage):
 	print("player hurt")
 	health_bar.value = player.hp
 	health_bar_number.text = str(health_bar.value / health_bar.max_value*player.hp)
@@ -50,8 +50,8 @@ func _on_player_level_up():
 	var tween = level_up_panel.create_tween()
 	tween.tween_property(level_up_panel, "position", Vector2(760,240),0.2).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
 	tween.play()
-	upgrade_options_panel.visible
-	level_up_panel.visible
+	upgrade_options_panel.visible = true
+	level_up_panel.visible = true
 	var options = 0
 	var options_max = 3
 	while options < options_max:

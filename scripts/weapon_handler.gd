@@ -11,7 +11,7 @@ var orb_pos2_reached = false
 
 func _process(delta):
 	if Input.is_action_pressed("click"):
-			print("clickpos",get_global_mouse_position())
+			#print("clickpos",get_global_mouse_position())
 			orb_attack_func()
 
 func orb_attack_func():
@@ -35,9 +35,9 @@ func orb_attack_func():
 		orb_tween.tween_property(orb_attack, "global_position", orb_attack.targetpos1,0.4).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
 		#orb_tween.chain().tween_property(orb_attack.sprite, "scale", Vector2(1,1),0.1).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
 		orb_tween.chain().tween_property(orb_attack, "global_position", orb_attack.mousetarget,0.3).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
-		orb_tween.play
+		orb_tween.play()
 		
-		#orb_attack_timer.wait_time = orb_attack.attack_speed
+		orb_attack_timer.wait_time = orb_attack.attack_speed
 		orb_attack_timer.start()
 		#DEBUG
 		#print("mousetarget",orb_attack.mousetarget)
