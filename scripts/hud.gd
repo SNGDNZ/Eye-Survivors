@@ -11,10 +11,10 @@ extends Control
 @onready var level_display = get_node("XpBar/%LevelDisplay")
 @onready var xp_bar = get_node("XpBar/%LevelDisplay")
 
-@onready var upgrade_options_panel = get_node("LevelUp/%UpgradeOptions")
+@onready var upgrade_options_panel = get_node("%UpgradeOptions")
+@onready var level_up_panel = get_node("%LevelUp")
 @onready var level_up_sound = get_node("LevelUp/%LevelUpSound")
-@onready var upgrade_options = preload("res://scenes/upgrade_option.tscn")
-@onready var level_up_panel = $LevelUp
+@onready var upgrade_select = preload("res://scenes/upgrade_option.tscn")
 
 func _ready():
 	health_bar.value = player.hp
@@ -48,17 +48,14 @@ func _on_player_level_up():
 	print("levelup")
 	level_up_sound.play()
 	var tween = level_up_panel.create_tween()
-	tween.tween_property(level_up_panel, "position", Vector2(760,240),0.2).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
-	tween.play()
-	upgrade_options_panel.visible = true
 	level_up_panel.visible = true
 	var options = 0
 	var options_max = 3
 	while options < options_max:
-		var option_choice = upgrade_options.instantiate()
+		var option_choice = upgrade_select.instantiate()
 		upgrade_options_panel.add_child(option_choice)
 		options += 1
-	#get_tree().paused = true
+	get_tree().paused = true
 
 func upgrade_character(upgrade):
 	var option_children = upgrade_options_panel.get_children()
@@ -66,5 +63,5 @@ func upgrade_character(upgrade):
 		i.queue_free()
 	level_up_panel.visible = false
 	level_up_panel.position = Vector2(376,1000)
-	#et_tree().paused = false
+	get_tree().paused = false
 	Events.calculate_xp.emit(0)

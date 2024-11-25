@@ -107,7 +107,9 @@ grow_horizontal = 2
 text = "Level 1"
 
 [node name="LevelUp" type="Panel" parent="."]
+unique_name_in_owner = true
 process_mode = 2
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -115,16 +117,21 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = 776.0
+offset_top = -200.0
 offset_right = 200.0
-offset_bottom = 1376.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UpgradeOption" parent="LevelUp" instance=ExtResource("2_577sd")]
+[node name="UpgradeOptions" type="VBoxContainer" parent="LevelUp"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 0
-color = Color(0.0272405, 0.00629027, 0.00143719, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UpgradeOption" parent="LevelUp/UpgradeOptions" instance=ExtResource("2_577sd")]
+layout_mode = 2
 
 [node name="LevelUpSound" type="AudioStreamPlayer" parent="LevelUp"]
 unique_name_in_owner = true
@@ -134,4 +141,4 @@ pitch_scale = 0.16
 
 [connection signal="timeout" from="LabelYouDied/DeathTextTimer" to="." method="_on_death_text_timer_timeout"]
 
-[editable path="LevelUp/UpgradeOption"]
+[editable path="LevelUp/UpgradeOptions/UpgradeOption"]

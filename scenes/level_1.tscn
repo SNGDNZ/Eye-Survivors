@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://c06jc5mjidcdl"]
+[gd_scene load_steps=11 format=4 uid="uid://c06jc5mjidcdl"]
 
-[ext_resource type="Texture2D" uid="uid://cy64ug1c5wsbp" path="res://sprites/terrain/tiles/tiles.png" id="1_fdmqa"]
-[ext_resource type="Texture2D" uid="uid://df6tsc7kfdow4" path="res://sprites/terrain/tiles/ground.png" id="2_uj7pg"]
+[ext_resource type="Texture2D" uid="uid://cy64ug1c5wsbp" path="res://sprites/Terrain/tiles/tiles.png" id="1_fdmqa"]
+[ext_resource type="Texture2D" uid="uid://df6tsc7kfdow4" path="res://sprites/Terrain/tiles/ground.png" id="2_uj7pg"]
 [ext_resource type="PackedScene" uid="uid://n2ic0gsguuw5" path="res://scenes/player.tscn" id="3_k660c"]
 [ext_resource type="PackedScene" uid="uid://co5llfp8c8u5o" path="res://scenes/hud.tscn" id="4_x2cph"]
 [ext_resource type="PackedScene" uid="uid://bgyonbnnlb414" path="res://scenes/weapon_handler.tscn" id="5_kg5lo"]
 [ext_resource type="PackedScene" uid="uid://80gy3m13ao0k" path="res://scenes/spawner.tscn" id="5_km2rm"]
+[ext_resource type="PackedScene" uid="uid://cbcqg27ccqf3l" path="res://scenes/xp_crystal.tscn" id="7_13nnv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jycxs"]
 texture = ExtResource("1_fdmqa")
@@ -45,8 +46,11 @@ tile_set = SubResource("TileSet_82uql")
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
+[node name="XpCrystal" parent="Loot" instance=ExtResource("7_13nnv")]
+xp_worth = 13
+
 [editable path="GUI/HUD"]
-[editable path="GUI/HUD/LevelUp/UpgradeOption"]
+[editable path="GUI/HUD/LevelUp/UpgradeOptions/UpgradeOption"]
 [editable path="Player"]
 [editable path="Player/Hurtbox"]
 [editable path="Spawner"]

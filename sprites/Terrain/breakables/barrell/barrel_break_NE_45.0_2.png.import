@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxjg5qfwtfp84"
-path="res://.godot/imported/barrel_break_NE_45.0_2.png-719dc38406cc46c1149427f68095f11f.ctex"
+path="res://.godot/imported/barrel_break_NE_45.0_2.png-f9401be1fb19770721c62f4c0a0b2991.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/terrain/breakables/barrell/barrel_break_NE_45.0_2.png"
-dest_files=["res://.godot/imported/barrel_break_NE_45.0_2.png-719dc38406cc46c1149427f68095f11f.ctex"]
+source_file="res://sprites/Terrain/breakables/barrell/barrel_break_NE_45.0_2.png"
+dest_files=["res://.godot/imported/barrel_break_NE_45.0_2.png-f9401be1fb19770721c62f4c0a0b2991.ctex"]
 
 [params]
 

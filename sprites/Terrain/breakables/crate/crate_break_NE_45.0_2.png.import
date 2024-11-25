@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnaj0fb61dclu"
-path="res://.godot/imported/crate_break_NE_45.0_2.png-295222845081a87dd0bb0c936a308ce1.ctex"
+path="res://.godot/imported/crate_break_NE_45.0_2.png-ef9bd45809bd66a92958458a350f56ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/terrain/breakables/crate/crate_break_NE_45.0_2.png"
-dest_files=["res://.godot/imported/crate_break_NE_45.0_2.png-295222845081a87dd0bb0c936a308ce1.ctex"]
+source_file="res://sprites/Terrain/breakables/crate/crate_break_NE_45.0_2.png"
+dest_files=["res://.godot/imported/crate_break_NE_45.0_2.png-ef9bd45809bd66a92958458a350f56ff.ctex"]
 
 [params]
 
