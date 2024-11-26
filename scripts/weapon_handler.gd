@@ -3,12 +3,9 @@ extends Node2D
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 
 #ORB
-
 @onready var orb_attack_timer = $OrbAttackTimer
-
 var orb = preload("res://scenes/orb.tscn")
 var orb_pos2_reached = false
-
 func _process(_delta):
 	if Input.is_action_pressed("click"):
 			#print("clickpos",get_global_mouse_position())
@@ -44,3 +41,13 @@ func orb_attack_func():
 		#print("playerglobalpos",player.global_position)
 		#print("playerpos",player.position)
 		#print("pos2",orb_attack.targetpos2)
+
+#SEPTIC LIGHT
+@onready var light_attack_timer = $LightAttackTimer
+var light = preload("res://scenes/septic_light.tscn")
+func light_attack_func():
+	if player.isdead:
+		return
+	if light_attack_timer.is_stopped():
+		var light_attack = light.instantiate()
+		light.global_position = player.global_position

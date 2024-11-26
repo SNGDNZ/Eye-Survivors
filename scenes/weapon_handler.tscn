@@ -8,3 +8,6 @@ script = ExtResource("1_osyye")
 [node name="OrbAttackTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="LightAttackTimer" type="Timer" parent="."]
+autostart = true

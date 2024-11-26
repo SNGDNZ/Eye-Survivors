@@ -20,6 +20,9 @@ var xp_amt = 0
 var xp_level = 1
 var xp_collected = 0
 
+var sprint_mod = 1.4
+var sprinting = false
+
 signal player_hurt()
 signal player_death()
 
@@ -62,8 +65,15 @@ func _physics_process(_delta):
 
 
 func movement():
+	if Input.is_action_pressed("shift"):
+		sprinting = true
+	else:
+		sprinting = false
 	var direction = Input.get_vector("left","right","up","down")
-	velocity = direction * speed
+	if not sprinting:
+		velocity = direction * speed
+	if sprinting:
+		velocity = direction * speed * sprint_mod
 	if Input.is_action_pressed("left"): #and not Input.is_action_pressed("right"):
 		sprite.play("walk_w")
 	if Input.is_action_pressed("right"): #and not Input.is_action_pressed("left"):

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
+@onready var hurtbox = $Hurtbox/CollisionShape2D
 @onready var sprite = $Sprite
 @onready var animation = $Sprite/AnimationPlayer
 @onready var hurt_sound1 = $EnemyHurtSnd1
@@ -34,10 +35,10 @@ func _on_hurtbox_hurt(damage, angle, knockback):
 func _on_enemy_hurt():
 	hurt_timer.start()
 	if randf_range(0,1) > 0.5:
-		hurt_sound1.set_pitch_scale(randf_range(0.5, 0.7))
+		hurt_sound1.set_pitch_scale(randf_range(0.4, 0.6))
 		hurt_sound1.play()
 	else:
-		hurt_sound2.set_pitch_scale(randf_range(0.5, 0.7))
+		hurt_sound2.set_pitch_scale(randf_range(0.4, 0.6))
 		hurt_sound2.play()
 
 func _on_enemy_hurt_timer_timeout() -> void:
@@ -49,6 +50,7 @@ func _on_enemy_hurt_timer_timeout() -> void:
 func _on_enemy_death() -> void:
 	death_timer.start()
 	sprite.play("death")
+	hurtbox.queue_free()
 	emit_signal("remove_from_array",self)
 
 func _on_enemy_death_timer_timeout() -> void:

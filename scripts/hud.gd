@@ -62,6 +62,5 @@ func upgrade_character(upgrade):
 	for i in option_children:
 		i.queue_free()
 	level_up_panel.visible = false
-	level_up_panel.position = Vector2(376,1000)
 	get_tree().paused = false
 	Events.calculate_xp.emit(0)
