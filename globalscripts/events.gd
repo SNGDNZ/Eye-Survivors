@@ -16,8 +16,9 @@ signal level_up()
 signal calculate_xp(gem_xp)
 signal selected_upgrade()
 
+#DEBUG
 func _input(event):
 	if event.is_action_pressed("t"):
 		Events.player_death.emit()
 	if event.is_action_pressed("r"):
-		get_tree().reload_current_scene()
+		return

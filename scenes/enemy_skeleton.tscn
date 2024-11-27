@@ -160,9 +160,8 @@ _data = {
 "damage_flash": SubResource("Animation_nv7gm")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6y48a"]
-radius = 11.0
-height = 36.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbecv"]
+radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q8hds"]
 
@@ -174,7 +173,6 @@ y_sort_enabled = true
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_05h6e")
-experience = 1
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wj1l7")
@@ -184,7 +182,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_8j5c0")
 position = Vector2(-4, 4)
 sprite_frames = SubResource("SpriteFrames_wstes")
-animation = &"death"
+animation = &"walk_e"
 autoplay = "walk_e"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
@@ -198,8 +196,9 @@ collision_mask = 4
 HurtboxType = 1
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -5)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_6y48a")
+shape = SubResource("CircleShape2D_jbecv")
 
 [node name="DisableTimer" parent="Hurtbox" index="1"]
 one_shot = false

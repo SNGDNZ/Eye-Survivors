@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://co5llfp8c8u5o"]
+[gd_scene load_steps=8 format=3 uid="uid://co5llfp8c8u5o"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_tjgwi"]
 [ext_resource type="PackedScene" uid="uid://cb10dexbgplab" path="res://scenes/upgrade_option.tscn" id="2_577sd"]
@@ -9,6 +9,9 @@ bg_color = Color(0.0177324, 0.0177324, 0.0177324, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ddjg"]
 bg_color = Color(0.536828, 0.133077, 0.165845, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kyq1"]
+bg_color = Color(0.239216, 0.588235, 0.4, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bf6yh"]
 font_size = 60
@@ -26,16 +29,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tjgwi")
 
-[node name="PlayerHealthBar" type="ProgressBar" parent="." groups=["player_health_bar"]]
+[node name="PlayerHealthBar" type="ProgressBar" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 13.0
-offset_top = -43.0
-offset_right = 497.0
-offset_bottom = -13.0
+offset_left = 16.0
+offset_top = -64.0
+offset_right = 500.0
+offset_bottom = -34.0
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_754s4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_8ddjg")
@@ -43,7 +46,7 @@ max_value = 50.0
 value = 50.0
 show_percentage = false
 
-[node name="PlayerHealthBarNumber" type="Label" parent="PlayerHealthBar" groups=["player_health_bar_number"]]
+[node name="PlayerHealthBarNumber" type="Label" parent="PlayerHealthBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -58,7 +61,24 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 
-[node name="LabelYouDied" type="Label" parent="." groups=["you_died_text"]]
+[node name="PlayerStaminaBar" type="ProgressBar" parent="." groups=["stamina_bar"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -26.0
+offset_right = 500.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_754s4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2kyq1")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="LabelYouDied" type="Label" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -79,7 +99,7 @@ vertical_alignment = 1
 visible_characters = 0
 visible_ratio = 0.0
 
-[node name="DeathTextTimer" type="Timer" parent="LabelYouDied" groups=["death_text_timer"]]
+[node name="DeathTextTimer" type="Timer" parent="LabelYouDied"]
 unique_name_in_owner = true
 wait_time = 0.05
 

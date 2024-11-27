@@ -1,6 +1,9 @@
 extends Area2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var sprite = $Sprite2D
+@onready var hitbox = $CollisionShape2D
+@onready var particles = $CPUParticles2D
 
 var hp := 1
 var speed := 1200
@@ -20,12 +23,16 @@ func _ready():
 
 func _physics_process(delta):
 	position += angle*speed*delta
+	if position.distance_to(player.global_position) > 800:
+		queue_free()
 
 func enemy_hit(charge = 1):
 	hp -= charge
 	if hp <= 0:
 		emit_signal("remove_from_array",self)
-		queue_free()
+		hitbox.queue_free()
+		particles.emitting = false
+		sprite.visible = false
 
 func _on_timer_timeout() -> void:
 	emit_signal("remove_from_array",self)

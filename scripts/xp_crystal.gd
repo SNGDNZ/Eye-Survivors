@@ -35,7 +35,7 @@ func collect():
 	xp_sound.play(0.5)
 	collision.call_deferred("set", "disabled", true)
 	sprite.visible = false
-	print("xp_worth", xp_worth)
+	#print("xp_worth", xp_worth)
 	return xp_worth
 
 
