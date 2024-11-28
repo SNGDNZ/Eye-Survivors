@@ -4,11 +4,12 @@ extends CharacterBody2D
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var hurtbox = $Hurtbox/CollisionShape2D
 @onready var sprite = $Sprite
-@onready var animation = $Sprite/AnimationPlayer
+@onready var dmg_anim = $Sprite/AnimationPlayer
 @onready var hurt_sound1 = $EnemyHurtSnd1
 @onready var hurt_sound2 = $EnemyHurtSnd2
 @onready var hurt_timer = $EnemyHurtTimer
 @onready var death_timer = $EnemyDeathTimer
+@onready var animation_timer = $AnimationTimer
 @export var speed = 70
 @export var hp = 20
 @export var knockback_recovery = 3.5
@@ -73,6 +74,9 @@ func _physics_process(delta: float):
 	var dir = global_position.direction_to(player.global_position)
 	velocity = dir*speed
 	velocity += knockback_enemy
+	move_and_slide()
+
+func _on_animation_timer_timeout() -> void:
 	var atp = global_position.angle_to_point(player.global_position) #angle to player
 	if atp > -PI/8 and atp < PI/8:
 		sprite.play("walk_e")
@@ -90,10 +94,7 @@ func _physics_process(delta: float):
 		sprite.play("walk_nw")
 	else:
 		sprite.play("walk_w")
-	
-
-	move_and_slide()
-
+	print(atp)
 
 func _on_remove_from_array(object: Variant) -> void:
 	pass # Replace with function body.

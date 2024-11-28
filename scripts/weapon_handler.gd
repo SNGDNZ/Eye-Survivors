@@ -2,15 +2,24 @@ extends Node2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 
-#ORB
-@onready var orb_attack_timer = $OrbAttackTimer
 var orb = preload("res://scenes/orb.tscn")
-var orb_pos2_reached = false
+@onready var orb_attack_timer = $OrbAttackTimer
+
+var flame = preload("res://scenes/project_flame.tscn")
+@onready var flame_attack_timer = $FlameAttackTimer
+@onready var flame_detection_area = $FlameDetectionArea
+
+var light = preload("res://scenes/septic_light.tscn")
+@onready var light_attack_timer = $LightAttackTimer
+
 func _process(_delta):
 	if Input.is_action_pressed("click"):
 			#print("clickpos",get_global_mouse_position())
 			orb_attack_func()
+	flame_detection_area.global_position = player.global_position
+	print(flame_detection_area.global_position)
 
+#ORB
 func orb_attack_func():
 	if player.isdead:
 		return
@@ -29,11 +38,10 @@ func orb_attack_func():
 		#TWEEN
 		var orb_tween = orb_attack.create_tween().set_parallel(true)
 		orb_tween.tween_property(orb_attack.sprite, "scale", Vector2(0.5,0.5),0.2).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
-		orb_tween.tween_property(orb_attack, "global_position", orb_attack.targetpos1,0.4).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
+		orb_tween.tween_property(orb_attack, "global_position", orb_attack.targetpos1,0.3).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
 		#orb_tween.chain().tween_property(orb_attack.sprite, "scale", Vector2(1,1),0.1).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
 		orb_tween.chain().tween_property(orb_attack, "global_position", orb_attack.mousetarget,0.3).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
 		orb_tween.play()
-		
 		orb_attack_timer.wait_time = orb_attack.attack_speed
 		orb_attack_timer.start()
 		#DEBUG
@@ -42,9 +50,37 @@ func orb_attack_func():
 		#print("playerpos",player.position)
 		#print("pos2",orb_attack.targetpos2)
 
+#FLAME
+var enemy_close = []
+
+func flame_attack_func():
+	if player.isdead:
+		return
+	if enemy_close.size() <= 0:
+		return
+	var flame_attack = flame.instantiate()
+	flame_attack.position = player.global_position
+	flame_attack.target = get_random_target()
+	add_child(flame_attack)
+	flame_attack_timer.wait_time = flame_attack.attack_speed
+	flame_attack_timer.start()
+
+func _on_flame_attack_timer_timeout() -> void:
+	flame_attack_func()
+
+func get_random_target():
+	if enemy_close.size() > 0:
+		return enemy_close.pick_random().global_position
+
+func _on_flame_detection_area_body_entered(body: Node2D) -> void:
+	if not enemy_close.has(body):
+		enemy_close.append(body)
+
+func _on_flame_detection_area_body_exited(body: Node2D) -> void:
+	if enemy_close.has(body):
+		enemy_close.erase(body)
+
 #SEPTIC LIGHT
-@onready var light_attack_timer = $LightAttackTimer
-var light = preload("res://scenes/septic_light.tscn")
 func light_attack_func():
 	if player.isdead:
 		return

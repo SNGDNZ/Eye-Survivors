@@ -35,7 +35,6 @@ signal player_death()
 func _ready():
 	Events.player_hurt.connect(_on_player_hurt)
 	Events.player_death.connect(_on_player_death)
-	flame_attack()
 	isdead = false
 
 #HEALTH
@@ -119,46 +118,6 @@ func _on_stamina_timer_timeout() -> void:
 
 func _on_stamina_regen_timer_timeout() -> void:
 	stamina += stamina_regen
-
-
-#ATTACKS
-var flame = preload("res://scenes/project_flame.tscn")
-
-@onready var flame_attack_timer = get_tree().get_first_node_in_group("gun_attack_timer")
-@onready var flame_enemy_detection_area = $EnemyDetectionArea
-
-#ENEMY RELATED
-var enemy_close = []
-
-#flame
-func flame_attack():
-	if isdead:
-		return
-	if enemy_close.size() <= 0:
-		return
-	var flame_attack = flame.instantiate()
-	flame_attack.position = position
-	flame_attack.target = get_random_target()
-	add_child(flame_attack)
-	flame_attack_timer.start()
-	flame_attack_timer.wait_time = flame_attack.attack_speed
-
-func _on_gun_attack_timer_timeout() -> void:
-	flame_attack()
-	flame_attack_timer.start()
-
-func get_random_target():
-	if enemy_close.size() > 0:
-		return enemy_close.pick_random().global_position
-	return Vector2.UP
-
-func _on_enemy_detection_area_body_entered(body):
-	if not enemy_close.has(body):
-		enemy_close.append(body)
-
-func _on_enemy_detection_area_body_exited(body):
-	if enemy_close.has(body):
-		enemy_close.erase(body)
 
 #XP RELATED
 func _on_grab_area_area_entered(area: Area2D) -> void:

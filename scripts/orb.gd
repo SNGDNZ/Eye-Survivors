@@ -3,6 +3,7 @@ extends Area2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var hitbox_area = $OrbImpactRadius 
 @onready var sprite = $OrbSprite
+@onready var impact_sprite = $OrbSprite/OrbImpactSprite
 @onready var orb_impact_radius_sprite = $OrbImpactRadiusSprite
 @onready var orb_emit_snd = $OrbEmitSnd
 @onready var orb_float_snd = $OrbFloatSnd
@@ -25,6 +26,7 @@ var direction : float
 
 func _ready():
 	orb_impact_radius_sprite.visible = false
+	impact_sprite.visible = false
 	set_collision_mask_value(3, false)
 	set_collision_layer_value(3, false)
 	sprite.scale = Vector2(0,0)
@@ -40,10 +42,11 @@ func _on_orb_float_timer_timeout() -> void:
 
 func _on_orb_impact_timer_timeout() -> void:
 	orb_impact_snd.set_pitch_scale(randf_range(0.9,1.1))
-	orb_impact_snd.play(0.1)
+	orb_impact_snd.play()
 	set_collision_mask_value(3, true)
 	set_collision_layer_value(3, true)
 	orb_impact_radius_sprite.visible = true
+	impact_sprite.visible = true
 
 func _on_orb_impact_snd_finished() -> void:
 	queue_free()

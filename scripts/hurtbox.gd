@@ -8,7 +8,6 @@ extends Area2D
 var hit_once_array = []
 
 signal hurt(damage, angle, knockback)
-signal damage_flash()
 
 func _on_area_entered(area):
 	if area.is_in_group("attack"):
