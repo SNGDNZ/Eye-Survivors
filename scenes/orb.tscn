@@ -7,9 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://5rr2ysw1topc" path="res://sounds/orb_float.mp3" id="4_s70a8"]
 [ext_resource type="AudioStream" uid="uid://c2tpc6opigdo2" path="res://sounds/orb_impact.mp3" id="5_2eoao"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2344"]
-radius = 70.0
-height = 176.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_vslmt"]
+radius = 87.2066
 
 [node name="Orb" type="Area2D" groups=["attack"]]
 collision_layer = 4
@@ -22,10 +21,11 @@ texture = ExtResource("2_kqk1h")
 
 [node name="OrbImpactRadius" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_q2344")
+shape = SubResource("CircleShape2D_vslmt")
 
 [node name="OrbImpactRadiusSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.88, 0.719459)
+texture_filter = 1
+scale = Vector2(0.88, 0.87)
 texture = ExtResource("3_w05fp")
 
 [node name="OrbEmitSnd" type="AudioStreamPlayer" parent="."]

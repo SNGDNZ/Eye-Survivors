@@ -68,15 +68,30 @@ func _physics_process(delta: float):
 	if isdead:
 		return
 	knockback_enemy = knockback_enemy.move_toward(Vector2.ZERO, knockback_recovery)
-	if self.global_position.distance_to(player.global_position) < 10:
+	if global_position.distance_to(player.global_position) < 10:
 		return
 	var dir = global_position.direction_to(player.global_position)
 	velocity = dir*speed
 	velocity += knockback_enemy
-	if(player.global_position.x - self.global_position.x) < 0:
-		sprite.flip_h = true
+	var atp = global_position.angle_to_point(player.global_position) #angle to player
+	if atp > -PI/8 and atp < PI/8:
+		sprite.play("walk_e")
+	elif atp > PI/8 and atp < PI*3/8:
+		sprite.play("walk_se")
+	elif atp > PI*3/8 and atp < PI*5/8:
+		sprite.play("walk_s")
+	elif atp > PI*5/8 and atp < PI*7/8:
+		sprite.play("walk_sw")
+	elif atp < -PI/8 and atp > -PI*3/8:
+		sprite.play("walk_ne")
+	elif atp < -PI*3/8 and atp > -PI*5/8:
+		sprite.play("walk_n")
+	elif atp < -PI*5/8 and atp > -PI*7/8:
+		sprite.play("walk_nw")
 	else:
-		sprite.flip_h = false
+		sprite.play("walk_w")
+	
+
 	move_and_slide()
 
 

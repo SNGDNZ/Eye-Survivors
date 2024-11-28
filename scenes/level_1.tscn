@@ -43,6 +43,7 @@ tile_set = SubResource("TileSet_82uql")
 [node name="Player" parent="." instance=ExtResource("3_k660c")]
 
 [node name="Spawner" parent="." instance=ExtResource("5_km2rm")]
+y_sort_enabled = true
 
 [node name="WeaponHandler" parent="." instance=ExtResource("5_kg5lo")]
 

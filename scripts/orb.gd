@@ -13,7 +13,7 @@ extends Area2D
 
 var hp = 1 
 var damage = 5
-var knockback_amount = 200 
+#var knockback_amount = 200 
 var area_size = 200 
 var attack_speed = 1.5 * Stats.attack_speed_mult
 

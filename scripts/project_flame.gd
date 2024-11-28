@@ -10,7 +10,7 @@ var speed := 1200
 var damage := 10
 var knockback_amount := 60
 var area_size := 1
-var attack_speed := 0.3
+var attack_speed := 0.3 #time between shots
 
 var target = Vector2.ZERO
 var angle = Vector2.ZERO 

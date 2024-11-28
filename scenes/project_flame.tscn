@@ -13,7 +13,7 @@ shader_parameter/flash_value = 0.8
 radius = 8.0
 
 [sub_resource type="Curve" id="Curve_m30ak"]
-_data = [Vector2(0, 1), 0.0, -1.38816, 0, 0, Vector2(1, 0.285714), -2.47079, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -0.510272, 0, 0, Vector2(1, 0), -0.410138, 0.0, 0, 0]
 point_count = 2
 
 [node name="ProjectFlame" type="Area2D" groups=["attack"]]
@@ -28,7 +28,7 @@ script = ExtResource("1_rpenc")
 material = SubResource("ShaderMaterial_j8i0g")
 position = Vector2(8.2, 0.199994)
 rotation = 4.71239
-scale = Vector2(2, 1.5)
+scale = Vector2(4.93586, 3.7019)
 texture = ExtResource("2_k4hv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["attack"]]
@@ -41,21 +41,23 @@ autostart = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_as_relative = false
-position = Vector2(0, 6)
+position = Vector2(-8, 0)
 amount = 15
 lifetime = 0.2
 speed_scale = 0.8
-randomness = 0.67
+randomness = 0.6
 lifetime_randomness = 0.8
 texture = ExtResource("2_k4hv2")
 emission_shape = 3
 emission_rect_extents = Vector2(4, 1)
-direction = Vector2(0, 0)
+particle_flag_align_y = true
+direction = Vector2(-1, 0)
+spread = 15.91
 gravity = Vector2(0, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 100.0
 scale_amount_min = 0.8
-scale_amount_max = 1.5
+scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_m30ak")
 color = Color(0.830752, 0.348506, 0.242138, 1)
 

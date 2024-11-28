@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var animation_player = $Sprite2D/AnimationPlayer
-@onready var animation_tree = get_node("$Sprite2D/AnimationTree")
 
 @onready var hurtbox = $Hurtbox
 @onready var hurt_sound = $PlayerHurtSnd
@@ -23,14 +22,12 @@ extends CharacterBody2D
 @export var stamina_usage = 0.5 #per 0.05 second
 @export var stamina_timeout = false
 
-var sprint_mod = 5
+var sprint_mod = 1.4
 var sprinting = false
 var isdead = false
 var xp_amt = 0
 var xp_level = 1
 var xp_collected = 0
-
-#enum mov_direction {N, NW, W, SW, S, SE, E, NE}
 
 signal player_hurt()
 signal player_death()
@@ -70,13 +67,13 @@ func _physics_process(_delta):
 	if hp <= 0:
 		return
 	if sprinting:
-		sprite.speed_scale = speed*sprint_mod / 35
+		sprite.speed_scale = speed*sprint_mod / 100
 	else:
-		sprite.speed_scale = speed / 35
+		sprite.speed_scale = speed / 100
 	movement()
 
 func movement():
-	if Input.is_action_pressed("shift") and stamina > 0 and stamina_timeout_timer.is_stopped():
+	if Input.is_action_pressed("shift") and stamina > 0 and stamina_timeout_timer.is_stopped() and sprite.is_playing():
 		sprinting = true
 		stamina_regen_timer.stop()
 		if stamina_timer.is_stopped():
@@ -93,6 +90,7 @@ func movement():
 	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	if direction == Vector2(0,0):
 		sprite.play("idle")
+		sprite.pause()
 	elif direction == Vector2(1,0):
 		sprite.play("walk_e")
 	elif direction == Vector2(-1,0):

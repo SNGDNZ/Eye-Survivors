@@ -28,7 +28,7 @@ func _ready():
 	Events.player_hurt.connect(_on_player_hurt)
 	Events.player_death.connect(_on_player_death)
 
-func _process(float) -> void:
+func _process(_float) -> void:
 	#if player.sprinting
 	health_bar.value = player.hp
 	health_bar.max_value = player.hp_max
@@ -56,7 +56,6 @@ func _on_death_text_timer_timeout() -> void:
 func _on_player_level_up():
 	print("levelup")
 	level_up_sound.play()
-	var tween = level_up_panel.create_tween()
 	level_up_panel.visible = true
 	var options = 0
 	var options_max = 4
