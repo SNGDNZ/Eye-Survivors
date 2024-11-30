@@ -9,7 +9,8 @@ extends CharacterBody2D
 @onready var hurt_sound2 = $EnemyHurtSnd2
 @onready var hurt_timer = $EnemyHurtTimer
 @onready var death_timer = $EnemyDeathTimer
-@onready var animation_timer = $AnimationTimer
+@onready var animation_timer_close = $AnimationTimerClose
+@onready var animation_timer_far = $AnimationTimerFar
 @export var speed = 70
 @export var hp = 20
 @export var knockback_recovery = 3.5
@@ -76,7 +77,23 @@ func _physics_process(delta: float):
 	velocity += knockback_enemy
 	move_and_slide()
 
-func _on_animation_timer_timeout() -> void:
+
+func _on_animation_timer_close_timeout() -> void:
+	face_player()
+	if global_position.distance_to(player.global_position) > 400:
+		animation_timer_close.one_shot = true
+		animation_timer_far.one_shot = false
+		animation_timer_far.start()
+
+func _on_animation_timer_far_timeout() -> void:
+	face_player()
+	if global_position.distance_to(player.global_position) < 400:
+		animation_timer_far.one_shot = true
+		animation_timer_close.one_shot = false
+		animation_timer_close.start()
+
+
+func face_player():
 	var atp = global_position.angle_to_point(player.global_position) #angle to player
 	if atp > -PI/8 and atp < PI/8:
 		sprite.play("walk_e")

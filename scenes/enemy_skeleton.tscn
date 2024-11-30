@@ -452,8 +452,11 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="AnimationTimer" type="Timer" parent="."]
+[node name="AnimationTimerClose" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="AnimationTimerFar" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [connection signal="enemy_death" from="." to="." method="_on_enemy_death"]
@@ -465,7 +468,8 @@ autostart = true
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="EnemyHurtTimer" to="." method="_on_enemy_hurt_timer_timeout"]
 [connection signal="timeout" from="EnemyDeathTimer" to="." method="_on_enemy_death_timer_timeout"]
-[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
+[connection signal="timeout" from="AnimationTimerClose" to="." method="_on_animation_timer_close_timeout"]
+[connection signal="timeout" from="AnimationTimerFar" to="." method="_on_animation_timer_far_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]
