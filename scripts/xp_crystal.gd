@@ -15,6 +15,7 @@ extends Area2D
 
 var target = null
 var speed = -4
+#var xp_sound_scale = XpHandler.xp_percent/50
 
 func _ready():
 	if xp_worth <5:
@@ -32,7 +33,9 @@ func _physics_process(delta):
 		speed += 20*delta
 
 func collect():
+	#xp_sound.set_pitch_scale(xp_sound_scale)
 	xp_sound.play(0.5)
+	#print(xp_sound.pitch_scale)
 	collision.call_deferred("set", "disabled", true)
 	sprite.visible = false
 	#print("xp_worth", xp_worth)

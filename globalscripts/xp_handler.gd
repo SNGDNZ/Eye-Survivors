@@ -6,6 +6,7 @@ extends Node
 var xp_amt = 0
 var xp_level = 1
 var xp_collected = 0
+#var xp_percent = 0
 
 func _ready():
 	set_xpbar(xp_amt, calculate_xp_cap())
@@ -14,8 +15,10 @@ func _ready():
 func _on_calculate_xp(gem_xp):
 	xp_collected += gem_xp
 	var xp_required = calculate_xp_cap()
+	#xp_percent += xp_amt / xp_required * 100
+	#print(xp_percent)
 	if xp_amt + xp_collected >= xp_required: #Level up
-		xp_collected -= xp_required-xp_amt
+		xp_collected -= xp_required - xp_amt
 		xp_level += 1
 		level_display.text = str("Level ",xp_level)
 		xp_amt = 0
@@ -25,8 +28,8 @@ func _on_calculate_xp(gem_xp):
 		xp_amt += xp_collected
 		xp_collected = 0
 	set_xpbar(xp_amt, xp_required)
-	print("xp_amt", xp_amt)
-	print("xp_req", xp_required)
+	#print("xp_amt", xp_amt)
+	#print("xp_req", xp_required)
 
 
 func calculate_xp_cap():

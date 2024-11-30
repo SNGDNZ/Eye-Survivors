@@ -94,7 +94,7 @@ func _on_animation_timer_timeout() -> void:
 		sprite.play("walk_nw")
 	else:
 		sprite.play("walk_w")
-	print(atp)
+	#print(atp)
 
 func _on_remove_from_array(object: Variant) -> void:
 	pass # Replace with function body.

@@ -11,8 +11,8 @@ extends Control
 
 @onready var level_display = get_tree().get_first_node_in_group("level_display")
 @onready var xp_bar = get_tree().get_first_node_in_group("xp_bar")
-
-@onready var upgrade_options_panel = get_node("%UpgradeOptions")
+@onready var level_delay_timer = $LevelUpDelayTimer
+@onready var upgrade_options_panel = $LevelUp/UpgradeOptions
 @onready var level_up_panel = get_node("%LevelUp")
 @onready var level_up_sound = get_node("LevelUp/%LevelUpSound")
 @onready var upgrade_select = preload("res://scenes/upgrade_option.tscn")
@@ -38,7 +38,6 @@ func _process(_float) -> void:
 
 func _on_player_hurt(_damage):
 	print("player hurt")
-	
 
 func _on_player_death():
 	label_death_text.visible = true
@@ -54,21 +53,52 @@ func _on_death_text_timer_timeout() -> void:
 	#death_text_tween.play()
 
 func _on_player_level_up():
+	level_delay_timer.start()
 	print("levelup")
 	level_up_sound.play()
+	get_tree().paused = true
+
+func _on_level_up_delay_timer_timeout() -> void:
 	level_up_panel.visible = true
 	var options = 0
 	var options_max = 4
 	while options < options_max:
 		var option_choice = upgrade_select.instantiate()
+		option_choice.upgrade = get_random_upgrade()
 		upgrade_options_panel.add_child(option_choice)
 		options += 1
-	get_tree().paused = true
 
 func upgrade_character(upgrade):
 	var option_children = upgrade_options_panel.get_children()
 	for i in option_children:
 		i.queue_free()
+	Stats.upgrade_options.clear()
+	Stats.collected_upgrades.append(upgrade)
 	level_up_panel.visible = false
 	get_tree().paused = false
 	Events.calculate_xp.emit(0)
+	print(Stats.collected_upgrades)
+
+func get_random_upgrade():
+	var dblist = []
+	for i in UpgradeDb.UPGRADES:
+		if i in Stats.collected_upgrades: #find already collected upgrades
+			pass
+		elif i in Stats.upgrade_options: #if upgrade is already an option
+			pass
+		#elif UpgradeDb.UPGRADES[i]["type"] == ["item"]: #dont pick placeholder upgrade
+			#pass
+		elif UpgradeDb.UPGRADES[i]["prerequisites"].size() > 0: #check for prerequisites
+			for n in UpgradeDb.UPGRADES[i]["prerequisites"]:
+				if not n in Stats.collected_upgrades:
+					pass
+				else:
+					dblist.append(i)
+		else:
+			dblist.append(i)
+	if dblist.size() > 0:
+		var random_upgrade = dblist.pick_random()
+		Stats.upgrade_options.append(random_upgrade)
+		return random_upgrade
+	else:
+		return null

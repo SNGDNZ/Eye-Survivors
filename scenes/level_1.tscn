@@ -53,7 +53,6 @@ y_sort_enabled = true
 xp_worth = 13
 
 [editable path="GUI/HUD"]
-[editable path="GUI/HUD/LevelUp/UpgradeOptions/UpgradeOption"]
 [editable path="Player"]
 [editable path="Player/Hurtbox"]
 [editable path="Spawner"]

@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var enemy = get_tree().get_first_node_in_group("enemy")
 @onready var sprite: AnimatedSprite2D = $Sprite2D
-@onready var animation_player = $Sprite2D/AnimationPlayer
 
 @onready var hurtbox = $Hurtbox
 @onready var hurt_sound = $PlayerHurtSnd

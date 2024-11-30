@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://co5llfp8c8u5o"]
+[gd_scene load_steps=9 format=3 uid="uid://co5llfp8c8u5o"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_tjgwi"]
-[ext_resource type="PackedScene" uid="uid://cb10dexbgplab" path="res://scenes/upgrade_option.tscn" id="2_577sd"]
-[ext_resource type="AudioStream" uid="uid://m5lfh6qiqacw" path="res://sounds/Cartoon Boing Sound Effect 2.mp3" id="2_fpcm2"]
+[ext_resource type="AudioStream" uid="uid://r6d1fdhnudix" path="res://sounds/level_up.mp3" id="2_abjof"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_754s4"]
 bg_color = Color(0.0177324, 0.0177324, 0.0177324, 1)
@@ -19,6 +18,12 @@ font_color = Color(1, 0, 0, 1)
 shadow_size = 11
 shadow_color = Color(0, 0, 0, 0.819608)
 shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccayq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ey83a"]
+bg_color = Color(1.05888e-06, 0.66792, 0.802918, 1)
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -112,6 +117,8 @@ offset_left = -576.0
 offset_right = 576.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ccayq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ey83a")
 show_percentage = false
 
 [node name="LevelDisplay" type="Label" parent="XpBar" groups=["level_display"]]
@@ -143,22 +150,20 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UpgradeOptions" type="VBoxContainer" parent="LevelUp"]
+[node name="LevelUpSound" type="AudioStreamPlayer" parent="LevelUp"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 400)
+stream = ExtResource("2_abjof")
+volume_db = -16.22
+
+[node name="UpgradeOptions" type="VBoxContainer" parent="LevelUp"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="UpgradeOption" parent="LevelUp/UpgradeOptions" instance=ExtResource("2_577sd")]
-layout_mode = 2
-
-[node name="LevelUpSound" type="AudioStreamPlayer" parent="LevelUp"]
-unique_name_in_owner = true
-stream = ExtResource("2_fpcm2")
-volume_db = -16.22
-pitch_scale = 0.16
+[node name="LevelUpDelayTimer" type="Timer" parent="."]
+process_mode = 2
+wait_time = 0.7
+one_shot = true
 
 [connection signal="timeout" from="LabelYouDied/DeathTextTimer" to="." method="_on_death_text_timer_timeout"]
-
-[editable path="LevelUp/UpgradeOptions/UpgradeOption"]
+[connection signal="timeout" from="LevelUpDelayTimer" to="." method="_on_level_up_delay_timer_timeout"]

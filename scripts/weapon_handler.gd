@@ -17,7 +17,6 @@ func _process(_delta):
 			#print("clickpos",get_global_mouse_position())
 			orb_attack_func()
 	flame_detection_area.global_position = player.global_position
-	print(flame_detection_area.global_position)
 
 #ORB
 func orb_attack_func():
@@ -31,7 +30,7 @@ func orb_attack_func():
 		orb_attack.direction = orb_attack.global_position.angle_to(orb_attack.mousetarget)
 		orb_attack.angle = enemy.global_position.direction_to(orb_attack.mousetarget)
 		
-		var orb_attack_cone = Vector2.from_angle(randf_range(-0.25*PI+ orb_attack.direction, 0.25*PI+ orb_attack.direction))*100
+		var orb_attack_cone = Vector2.from_angle(randf_range(0,2*PI))*100
 		orb_attack.targetpos1 = player.global_position + orb_attack_cone
 		orb_attack.targetpos2 = orb_attack.mousetarget
 		add_child(orb_attack)
