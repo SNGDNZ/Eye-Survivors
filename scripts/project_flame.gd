@@ -5,12 +5,12 @@ extends Area2D
 @onready var hitbox = $CollisionShape2D
 @onready var particles = $CPUParticles2D
 
-var hp := 1
-var speed := 1200
-var damage := 10
-var knockback_amount := 60
-var area_size := 1
-var attack_speed := 0.3 #time between shots
+var hp := 1 + Stats.penetration_mult
+var speed := 1200 * Stats.speed_mult
+var damage := 10 * Stats.damage_mult
+var knockback_amount := 60 * Stats.knockback_mult
+var area_size := 1 * Stats.area_mult
+var attack_speed := 0.3 * Stats.attack_speed_mult
 
 var target = Vector2.ZERO
 var angle = Vector2.ZERO 

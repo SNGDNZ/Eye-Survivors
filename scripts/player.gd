@@ -12,7 +12,7 @@ extends CharacterBody2D
 @onready var stamina_regen_timer = $StaminaRegenTimer
 @onready var stamina_timeout_timer = $StaminaTimeoutTimer
 
-@export var speed = 100
+@export var speed = 100 * Stats.speed_mult
 @export var hp_max = 50
 @export var hp = 50
 @export var stamina_max = 50

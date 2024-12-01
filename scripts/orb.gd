@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var hitbox_area = $OrbImpactRadius 
+@onready var hitbox = $OrbImpactRadius 
 @onready var sprite = $OrbSprite
 @onready var impact_sprite = $OrbSprite/OrbImpactSprite
 @onready var orb_impact_radius_sprite = $OrbImpactRadiusSprite
@@ -12,10 +12,10 @@ extends Area2D
 @onready var orb_impact_timer = $OrbImpactTimer
 
 
-var hp = 1 
-var damage = 5
-#var knockback_amount = 200 
-var area_size = 200 
+#var hp = 1 
+var damage = 5 * Stats.damage_mult
+var knockback_amount = 50 * Stats.knockback_mult
+var area_size = 200 * Stats.area_mult
 var attack_speed = 1.5 * Stats.attack_speed_mult
 
 var mousetarget := Vector2.ZERO

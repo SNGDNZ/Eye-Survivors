@@ -29,7 +29,6 @@ func _ready():
 	Events.player_death.connect(_on_player_death)
 
 func _process(_float) -> void:
-	#if player.sprinting
 	health_bar.value = player.hp
 	health_bar.max_value = player.hp_max
 	health_bar_number.text = str(health_bar.value / health_bar.max_value*player.hp)
@@ -74,10 +73,11 @@ func upgrade_character(upgrade):
 		i.queue_free()
 	Stats.upgrade_options.clear()
 	Stats.collected_upgrades.append(upgrade)
+	print(Stats.collected_upgrades)
 	level_up_panel.visible = false
 	get_tree().paused = false
 	Events.calculate_xp.emit(0)
-	print(Stats.collected_upgrades)
+	Events.calculate_upgrade.emit(upgrade)
 
 func get_random_upgrade():
 	var dblist = []
@@ -86,8 +86,9 @@ func get_random_upgrade():
 			pass
 		elif i in Stats.upgrade_options: #if upgrade is already an option
 			pass
-		#elif UpgradeDb.UPGRADES[i]["type"] == ["item"]: #dont pick placeholder upgrade
-			#pass
+		elif UpgradeDb.UPGRADES[i]["type"] == "item": #dont pick placeholder upgrade
+			print("food ignored")
+			pass
 		elif UpgradeDb.UPGRADES[i]["prerequisites"].size() > 0: #check for prerequisites
 			for n in UpgradeDb.UPGRADES[i]["prerequisites"]:
 				if not n in Stats.collected_upgrades:

@@ -24,8 +24,12 @@ func orb_attack_func():
 		return
 	if orb_attack_timer.is_stopped():
 		var orb_attack = orb.instantiate()
+		orb_attack_timer.wait_time = orb_attack.attack_speed
+		print("orbdmg",orb_attack.damage)
+		print("orbatkspd",orb_attack.attack_speed)
+		print("orbkb",orb_attack.knockback_amount)
+		print("playerspd",player.speed)
 		orb_attack.global_position = player.global_position
-		
 		orb_attack.mousetarget = get_global_mouse_position() #VECTOR
 		orb_attack.direction = orb_attack.global_position.angle_to(orb_attack.mousetarget)
 		orb_attack.angle = enemy.global_position.direction_to(orb_attack.mousetarget)
@@ -41,7 +45,6 @@ func orb_attack_func():
 		#orb_tween.chain().tween_property(orb_attack.sprite, "scale", Vector2(1,1),0.1).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
 		orb_tween.chain().tween_property(orb_attack, "global_position", orb_attack.mousetarget,0.3).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
 		orb_tween.play()
-		orb_attack_timer.wait_time = orb_attack.attack_speed
 		orb_attack_timer.start()
 		#DEBUG
 		#print("mousetarget",orb_attack.mousetarget)
@@ -58,10 +61,12 @@ func flame_attack_func():
 	if enemy_close.size() <= 0:
 		return
 	var flame_attack = flame.instantiate()
+	flame_attack_timer.wait_time = flame_attack.attack_speed
+	#print("flame atk spd", flame_attack.attack_speed)
+	
 	flame_attack.position = player.global_position
 	flame_attack.target = get_random_target()
 	add_child(flame_attack)
-	flame_attack_timer.wait_time = flame_attack.attack_speed
 	flame_attack_timer.start()
 
 func _on_flame_attack_timer_timeout() -> void:

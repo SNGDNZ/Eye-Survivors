@@ -14,7 +14,10 @@ signal player_hurt(damage)
 #XP HANDLER
 signal level_up()
 signal calculate_xp(gem_xp)
+
+#UPGRADES
 signal selected_upgrade()
+signal calculate_upgrade(upgrade)
 
 #DEBUG
 func _input(event):

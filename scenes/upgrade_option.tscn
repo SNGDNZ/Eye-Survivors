@@ -7,7 +7,7 @@ process_mode = 2
 custom_minimum_size = Vector2(400, 100)
 offset_right = 400.0
 offset_bottom = 100.0
-color = Color(0.775867, 0.593563, 0.592607, 1)
+color = Color(0.07, 0.07, 0.07, 1)
 script = ExtResource("1_yb7lt")
 
 [node name="LabelUpgradeTitle" type="Label" parent="."]

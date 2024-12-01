@@ -33,7 +33,7 @@ script = ExtResource("1_rpenc")
 material = SubResource("ShaderMaterial_j8i0g")
 position = Vector2(8.2, 0.199994)
 rotation = 4.71239
-scale = Vector2(4.93586, 3.7019)
+scale = Vector2(5, 3.75)
 texture = ExtResource("2_k4hv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["attack"]]
