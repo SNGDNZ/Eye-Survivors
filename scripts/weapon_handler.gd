@@ -25,10 +25,10 @@ func orb_attack_func():
 	if orb_attack_timer.is_stopped():
 		var orb_attack = orb.instantiate()
 		orb_attack_timer.wait_time = orb_attack.attack_speed
-		print("orbdmg",orb_attack.damage)
-		print("orbatkspd",orb_attack.attack_speed)
-		print("orbkb",orb_attack.knockback_amount)
-		print("playerspd",player.speed)
+		#print("orbdmg",orb_attack.damage)
+		#print("orbatkspd",orb_attack.attack_speed)
+		#print("orbkb",orb_attack.knockback_amount)
+		#print("playerspd",player.speed)
 		orb_attack.global_position = player.global_position
 		orb_attack.mousetarget = get_global_mouse_position() #VECTOR
 		orb_attack.direction = orb_attack.global_position.angle_to(orb_attack.mousetarget)

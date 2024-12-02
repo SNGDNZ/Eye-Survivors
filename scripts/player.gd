@@ -12,21 +12,23 @@ extends CharacterBody2D
 @onready var stamina_regen_timer = $StaminaRegenTimer
 @onready var stamina_timeout_timer = $StaminaTimeoutTimer
 
-@export var speed = 100 * Stats.speed_mult
-@export var hp_max = 50
-@export var hp = 50
-@export var stamina_max = 50
-@export var stamina = 50
-@export var stamina_regen = 1 #per 0.1 second
-@export var stamina_usage = 0.5 #per 0.05 second
+@export var speed = 100.0 * Stats.speed_mult
+@export var hp_max = 50.0 * Stats.health_mult
+@export var hp = 50.0
+@export var stamina_max = 50.0 * Stats.stamina_mult
+@export var stamina = 50.0
+@export var stamina_regen = 1.0 * Stats.stamina_regen_mult #per 0.1 second 
+@export var stamina_usage = 0.5 * Stats.stamina_regen_mult #per 0.05 second
 @export var stamina_timeout = false
 
-var sprint_mod = 1.4
+var sprint_mod = 1.4 * Stats.sprint_mult
 var sprinting = false
 var isdead = false
 var xp_amt = 0
 var xp_level = 1
 var xp_collected = 0
+
+var playerstats = [speed, hp_max, stamina_max, stamina_regen, sprint_mod]
 
 signal player_hurt()
 signal player_death()

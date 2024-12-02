@@ -73,7 +73,8 @@ func upgrade_character(upgrade):
 		i.queue_free()
 	Stats.upgrade_options.clear()
 	Stats.collected_upgrades.append(upgrade)
-	print(Stats.collected_upgrades)
+	#print(Stats.collected_upgrades)
+	print(player.playerstats)
 	level_up_panel.visible = false
 	get_tree().paused = false
 	Events.calculate_xp.emit(0)
