@@ -62,7 +62,6 @@ func flame_attack_func():
 		return
 	var flame_attack = flame.instantiate()
 	flame_attack_timer.wait_time = flame_attack.attack_speed
-	#print("flame atk spd", flame_attack.attack_speed)
 	
 	flame_attack.position = player.global_position
 	flame_attack.target = get_random_target()

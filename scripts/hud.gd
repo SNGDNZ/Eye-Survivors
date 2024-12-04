@@ -9,7 +9,7 @@ extends Control
 @onready var label_death_text = $LabelYouDied
 @onready var death_text_timer = get_node("%DeathTextTimer")
 
-@onready var level_display = get_tree().get_first_node_in_group("level_display")
+@onready var level_display = get_node("%LevelDisplay")
 @onready var xp_bar = get_tree().get_first_node_in_group("xp_bar")
 @onready var level_delay_timer = $LevelUpDelayTimer
 @onready var upgrade_options_panel = $LevelUp/UpgradeOptions
@@ -20,7 +20,7 @@ extends Control
 func _ready():
 	health_bar.value = player.hp
 	health_bar.max_value = player.hp_max
-	health_bar_number.text = str(health_bar.value / health_bar.max_value*player.hp)
+	health_bar_number.text = str(health_bar.value, " / ", player.hp_max)
 	stamina_bar.value = player.stamina
 	stamina_bar.max_value = player.stamina_max
 	Events.level_up.connect(_on_player_level_up)
@@ -31,9 +31,11 @@ func _ready():
 func _process(_float) -> void:
 	health_bar.value = player.hp
 	health_bar.max_value = player.hp_max
-	health_bar_number.text = str(health_bar.value / health_bar.max_value*player.hp)
+	health_bar_number.text = str(health_bar.value, " / ", player.hp_max)
+	health_bar.size.x = 400 * Stats.health_mult
 	stamina_bar.value = player.stamina
 	stamina_bar.max_value = player.stamina_max
+	stamina_bar.size.x = 400 * Stats.stamina_mult
 
 func _on_player_hurt(_damage):
 	print("player hurt")
@@ -74,7 +76,6 @@ func upgrade_character(upgrade):
 	Stats.upgrade_options.clear()
 	Stats.collected_upgrades.append(upgrade)
 	#print(Stats.collected_upgrades)
-	print(player.playerstats)
 	level_up_panel.visible = false
 	get_tree().paused = false
 	Events.calculate_xp.emit(0)

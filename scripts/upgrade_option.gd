@@ -24,6 +24,7 @@ func _input(event):
 	if event.is_action("click"):
 		if mouse_over == true:
 			Events.selected_upgrade.emit(upgrade)
+			Events.update_playerstats.emit()
 
 func _on_mouse_entered() -> void:
 	mouse_over = true

@@ -11,17 +11,19 @@ extends CharacterBody2D
 @onready var stamina_timer = $StaminaTimer
 @onready var stamina_regen_timer = $StaminaRegenTimer
 @onready var stamina_timeout_timer = $StaminaTimeoutTimer
+@onready var grab_area = $GrabArea/CollisionShape2D
 
-@export var speed = 100.0 * Stats.speed_mult
-@export var hp_max = 50.0 * Stats.health_mult
+@export var speed = 100
+@export var hp_max = 50.0
 @export var hp = 50.0
-@export var stamina_max = 50.0 * Stats.stamina_mult
+@export var hp_regen = 0.15 #per 0.5 second
+@export var stamina_max = 50.0
 @export var stamina = 50.0
-@export var stamina_regen = 1.0 * Stats.stamina_regen_mult #per 0.1 second 
-@export var stamina_usage = 0.5 * Stats.stamina_regen_mult #per 0.05 second
+@export var stamina_regen = 1.0 #per 0.1 second 
+@export var stamina_usage = 0.5 #per 0.05 second
 @export var stamina_timeout = false
 
-var sprint_mod = 1.4 * Stats.sprint_mult
+var sprint_mod = 1.4
 var sprinting = false
 var isdead = false
 var xp_amt = 0
@@ -36,7 +38,23 @@ signal player_death()
 func _ready():
 	Events.player_hurt.connect(_on_player_hurt)
 	Events.player_death.connect(_on_player_death)
+	Events.update_playerstats.connect(update_stats)
 	isdead = false
+
+func update_stats():
+	return
+
+func _process(float):
+	speed = 100 * Stats.speed_mult
+	sprint_mod = 1.4 * Stats.sprint_mult
+	hp_max = 50 * Stats.health_mult
+	hp_regen = 0.15 + Stats.health_regen_mult
+	stamina_max = 50 * Stats.stamina_mult
+	stamina_regen = 1.0 * Stats.stamina_regen_mult
+	
+	print("hp_regen",hp_regen)
+	print("stamina_regen",stamina_regen)
+
 
 #HEALTH
 func _on_hurtbox_hurt(damage, _angle, _knockback):
@@ -62,6 +80,18 @@ func _on_player_death():
 		sprite.play("idle")
 		velocity = Vector2.ZERO
 
+func _on_health_regen_timer_timeout() -> void:
+	if hp < hp_max and not isdead:
+		hp += hp_regen
+		if hp > hp_max:
+			hp = hp_max
+
+func _on_stamina_timer_timeout() -> void:
+	stamina -= stamina_usage
+
+func _on_stamina_regen_timer_timeout() -> void:
+	stamina += stamina_regen
+
 #MOVEMENT
 func _physics_process(_delta):
 	if hp <= 0:
@@ -70,6 +100,7 @@ func _physics_process(_delta):
 		sprite.speed_scale = speed*sprint_mod / 100
 	else:
 		sprite.speed_scale = speed / 100
+	grab_area.shape.radius = 120 * Stats.pickup_range_mult
 	movement()
 
 func movement():
@@ -113,12 +144,6 @@ func movement():
 	else:
 		velocity = direction * speed
 	move_and_slide()
-
-func _on_stamina_timer_timeout() -> void:
-	stamina -= stamina_usage
-
-func _on_stamina_regen_timer_timeout() -> void:
-	stamina += stamina_regen
 
 #XP RELATED
 func _on_grab_area_area_entered(area: Area2D) -> void:

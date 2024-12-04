@@ -10,6 +10,7 @@ signal xp_spawn()
 #PLAYER
 signal player_death()
 signal player_hurt(damage)
+signal update_playerstats()
 
 #XP HANDLER
 signal level_up()

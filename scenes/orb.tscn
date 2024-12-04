@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b0jxgraxai30x" path="res://sprites/septic_light/zone.png" id="5_8boyo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vslmt"]
-radius = 87.2066
+radius = 88.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jjwbo"]
 shader = ExtResource("3_vadq0")
@@ -28,7 +28,6 @@ collision_mask = 4
 script = ExtResource("1_fq6v1")
 
 [node name="OrbImpactRadius" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource("CircleShape2D_vslmt")
 
@@ -38,7 +37,7 @@ texture = ExtResource("2_kqk1h")
 [node name="OrbImpactSprite" type="Sprite2D" parent="OrbSprite"]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_jjwbo")
-scale = Vector2(0.765625, 0.765625)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_8boyo")
 
 [node name="OrbEmitSnd" type="AudioStreamPlayer" parent="."]
@@ -64,7 +63,7 @@ one_shot = true
 [node name="OrbImpactRadiusSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_05ffy")
-scale = Vector2(0.88, 0.87)
+scale = Vector2(0.88, 0.88)
 texture = ExtResource("3_w05fp")
 
 [connection signal="finished" from="OrbImpactSnd" to="." method="_on_orb_impact_snd_finished"]

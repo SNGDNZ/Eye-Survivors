@@ -31,6 +31,7 @@ window/stretch/mode="viewport"
 attack=""
 loot=""
 enemy=""
+flame=""
 
 [input]
 

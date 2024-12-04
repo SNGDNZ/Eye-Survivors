@@ -8,8 +8,8 @@ extends Area2D
 var hp := 1 + Stats.penetration_mult
 var speed := 1200 * Stats.speed_mult
 var damage := 10 * Stats.damage_mult
-var knockback_amount := 60 * Stats.knockback_mult
-var area_size := 1 * Stats.area_mult
+var knockback_amount := 60.0 * Stats.knockback_mult
+var area_size := 1 * (2 * Stats.area_mult)
 var attack_speed := 0.3 * Stats.attack_speed_mult
 
 var target = Vector2.ZERO
@@ -18,6 +18,8 @@ var angle = Vector2.ZERO
 signal remove_from_array(object)
 
 func _ready():
+	sprite.scale = Vector2(4 + area_size, 2.75 + area_size)
+	hitbox.shape.radius = 10 * area_size
 	angle = player.global_position.direction_to(target)
 	rotation = angle.angle()
 
